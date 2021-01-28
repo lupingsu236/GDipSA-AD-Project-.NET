@@ -18,12 +18,16 @@ namespace SA51ADWebApp1.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult NSLine()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult EWLine()
+        {
+            return View();
+        }
+        public IActionResult CCLine()
         {
             return View();
         }
