@@ -20,16 +20,19 @@ namespace SA51ADWebApp1.Controllers
 
         public IActionResult NSLine()
         {
-            return View();
+            ViewData["Title"] = "NS Line";
+            return View("Line");
         }
 
         public IActionResult EWLine()
         {
-            return View();
+            ViewData["Title"] = "EW Line";
+            return View("Line");
         }
         public IActionResult CCLine()
         {
-            return View();
+            ViewData["Title"] = "CC Line";
+            return View("Line");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
