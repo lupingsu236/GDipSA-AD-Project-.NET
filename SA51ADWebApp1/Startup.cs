@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SA51ADWebApp1.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +27,12 @@ namespace SA51ADWebApp1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<Database>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DbConn")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, [FromServices] Database db)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +57,14 @@ namespace SA51ADWebApp1
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            bool wantreset = Configuration.GetValue<bool>("Db:WantReset");
+            if (wantreset)
+            {
+                db.Database.EnsureDeleted();    // wipe out existing database
+                db.Database.EnsureCreated();    // our database is created after this line
+                new Seeder(db);
+            }
         }
     }
 }

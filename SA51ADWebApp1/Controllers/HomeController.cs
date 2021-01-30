@@ -18,14 +18,21 @@ namespace SA51ADWebApp1.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult NSLine()
         {
-            return View();
+            ViewData["Title"] = "NS Line";
+            return View("Line");
         }
 
-        public IActionResult Privacy()
+        public IActionResult EWLine()
         {
-            return View();
+            ViewData["Title"] = "EW Line";
+            return View("Line");
+        }
+        public IActionResult CCLine()
+        {
+            ViewData["Title"] = "CC Line";
+            return View("Line");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
