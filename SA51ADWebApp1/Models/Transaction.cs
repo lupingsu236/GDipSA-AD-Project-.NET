@@ -13,7 +13,7 @@ namespace SA51ADWebApp1.Models
         [Required]
         public string UserId { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual Admin User { get; set; }
 
         [Required]
         public string StationOnLineId { get; set; }

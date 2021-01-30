@@ -25,6 +25,6 @@ namespace SA51ADWebApp1.Repository
         public DbSet<Models.Station> Stations { get; set; }
         public DbSet<Models.StationOnLine> StationOnLines { get; set; }
         public DbSet<Models.Transaction> Transactions { get; set; }
-        public DbSet<Models.User> Users { get; set; }
+        public DbSet<Models.Admin> Admins { get; set; }
     }
 }

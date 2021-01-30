@@ -63,6 +63,7 @@ namespace SA51ADWebApp1
             {
                 db.Database.EnsureDeleted();    // wipe out existing database
                 db.Database.EnsureCreated();    // our database is created after this line
+                new Seeder(db);
             }
         }
     }
