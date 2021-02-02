@@ -1,12 +1,10 @@
 ﻿@model Admin
 @{
-    ViewData["Title"] = "Login";
+    Layout = null;
     var msg = ViewData["errorMsg"];
 }
 <style>
-
     /* BASIC */
-
     html {
         background-color: wheat;
     }
@@ -36,7 +34,6 @@
 
 
     /* STRUCTURE */
-
     .wrapper {
         display: flex;
         align-items: center;
@@ -73,7 +70,6 @@
 
 
     /* TABS */
-
     h2.inactive {
         color: #cccccc;
     }
@@ -86,7 +82,6 @@
 
 
     /* FORM TYPOGRAPHY*/
-
     input[type=button], input[type=submit], input[type=reset] {
         background-color: #56baed;
         border: none;
@@ -151,13 +146,20 @@
         }
 
     /* OTHERS */
-
     *:focus {
         outline: none;
     }
 
     #icon {
         width: 60%;
+    }
+
+    /*Error Msg*/
+    .errorMsg {
+        color: red;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
     }
 </style>
 
@@ -191,6 +193,7 @@
         <form id="loginForm" method="post" asp-controller="Login" asp-action="ValidateLogin">
             <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" asp-for="username" required>
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" asp-for="password" required>
+            <p class="errorMsg">@msg</p>
             <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
 
