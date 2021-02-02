@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SA51ADWebApp1.Middleware;
 using SA51ADWebApp1.Repository;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SA51ADWebApp1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddSession(); //sessions
             services.AddDbContext<Database>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DbConn")));
         }
 
@@ -46,11 +47,10 @@ namespace SA51ADWebApp1
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseSession(); //sessions
+            app.UseMiddleware<AuthMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

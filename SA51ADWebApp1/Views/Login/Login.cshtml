@@ -9,10 +9,20 @@
         margin: auto;
         text-align: center;
     }
+    #mrtlogoimg {
+        width: 150px;
+    }
 </style>
 
 <div class="content">
-    <h1>Login</h1>
+    <img src="~/images/mrt.png" id="mrtlogoimg" alt="Mrt-logo" />
+    <h2>Login</h2>
+    @using (Html.BeginForm("ValidateLogin", "Login", FormMethod.Post)) //method, controller, post or get
+    {
+        <p>Username: @Html.TextBoxFor(m => m.username)</p>
+        <p>Password: @Html.PasswordFor(m => m.password)</p>
+        <input type="submit" value="Submit" />
+    }
 </div>
 
 

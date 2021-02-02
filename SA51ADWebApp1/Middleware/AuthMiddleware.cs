@@ -1,0 +1,35 @@
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SA51ADWebApp1.Middleware
+{
+    public class AuthMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public AuthMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+        
+        public async Task Invoke(HttpContext context)
+        {
+            string controller = (string)context.Request.RouteValues["controller"];
+
+            if (controller != "Login")
+            {
+                string sessionId = context.Request.Cookies["sessionId"];
+                if (sessionId == null)
+                {
+                    context.Response.Redirect("https://" + context.Request.Host + "/");
+                    return;
+                }
+            }
+
+            await next(context);
+        }
+    }
+}

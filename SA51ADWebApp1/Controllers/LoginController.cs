@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SA51ADWebApp1.Models;
 using SA51ADWebApp1.Repository;
 using System;
@@ -19,15 +20,27 @@ namespace SA51ADWebApp1.Controllers
 
         [Route("/")]
         [Route("/login")]
-        public IActionResult DisplayLoginForm()
+        public IActionResult Login()
         {
             Admin newLogin = new Admin();
             return View(newLogin);
         }
 
         [HttpPost]
-        public IActionResult Login(Admin newLogin)
+        public IActionResult ValidateLogin(Admin newLogin)
         {
+            Admin inDatabase = dbcontext.Admins.Where(x => x.username == newLogin.username && x.password == newLogin.password).FirstOrDefault();
+            if (inDatabase == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                string sessionId = System.Guid.NewGuid().ToString();
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddDays(2);
+                Response.Cookies.Append("sessionId", sessionId, options);
+            }
             return View("Home");
         }
 
