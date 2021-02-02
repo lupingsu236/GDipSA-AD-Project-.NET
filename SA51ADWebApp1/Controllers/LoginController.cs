@@ -42,7 +42,7 @@ namespace SA51ADWebApp1.Controllers
                 ViewData["errorMsg"] = "Incorrect username or password";
                 return View("Login");
             }
-            return View("Home");
+            return RedirectToAction("Dashboard","Home");
         }
 
         [Route("/logout")]
