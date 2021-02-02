@@ -27,6 +27,13 @@ namespace SA51ADWebApp1.Middleware
                     context.Response.Redirect("https://" + context.Request.Host + "/");
                     return;
                 }
+                else
+                {
+                    // refresh cookie everytime a request pass through this.
+                    CookieOptions options = new CookieOptions();
+                    options.Expires = DateTime.Now.AddDays(1);
+                    context.Response.Cookies.Append("sessionId", sessionId, options);
+                }
             }
 
             await next(context);

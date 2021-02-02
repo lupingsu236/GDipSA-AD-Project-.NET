@@ -30,15 +30,17 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult ValidateLogin(Admin newLogin)
         {
             Admin inDatabase = dbcontext.Admins.Where(x => x.username == newLogin.username && x.password == newLogin.password).FirstOrDefault();
+            
             if (inDatabase == null)
             {
-                return RedirectToAction("Login");
+                ViewData["errorMsg"] = "Incorrect username or password";
+                return View("Login");
             }
             else
             {
                 string sessionId = System.Guid.NewGuid().ToString();
                 CookieOptions options = new CookieOptions();
-                options.Expires = DateTime.Now.AddDays(2);
+                options.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Append("sessionId", sessionId, options);
             }
             return View("Home");
@@ -47,7 +49,16 @@ namespace SA51ADWebApp1.Controllers
         [Route("/logout")]
         public IActionResult Logout()
         {
-            return View("Logout");
+            string sessionId = Request.Cookies["sessionId"];
+            if (sessionId == null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                Response.Cookies.Delete("sessionId");
+                return View("Logout");
+            }
         }
     }
 }

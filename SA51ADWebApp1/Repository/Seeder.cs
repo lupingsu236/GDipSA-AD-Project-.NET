@@ -424,6 +424,9 @@ namespace SA51ADWebApp1.Repository
             CE2.status = "Operational"; CE2.timeToNextStation = 2; CE2.timeToNextStationOpp = 0;
             db.Add(CE2);
 
+            //find a way to stream from CVS in to this.
+            //object item = inputstream....
+            //createStationOnLine(item.Id, time,timeOpp)
             db.SaveChanges();
         }
     }
