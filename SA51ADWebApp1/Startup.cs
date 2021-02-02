@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SA51ADWebApp1.Middleware;
 using SA51ADWebApp1.Repository;
+using SA51ADWebApp1.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace SA51ADWebApp1
         {
             services.AddControllersWithViews();
             services.AddSession(); //sessions
+            services.AddScoped<IAdminService, AdminService>();
             services.AddDbContext<Database>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DbConn")));
         }
 
