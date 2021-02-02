@@ -17,6 +17,10 @@ namespace SA51ADWebApp1.Controllers
         {
             _logger = logger;
         }
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
 
         public IActionResult NSLine()
         {
