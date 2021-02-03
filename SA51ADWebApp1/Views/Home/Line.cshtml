@@ -2,8 +2,30 @@
 
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome Team 4</h1>
     <h1>@ViewData["Title"]</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Station Code</th>
+                <th>Station Name</th>
+                <th>Status</th>
+                <th>Edit</th>
+            </tr>
+            @foreach (var sol in (List<StationOnLine>)ViewBag.Line)
+            {
+                <tr>
+                    <td>@sol.stationCode</td>
+                    <td>@sol.Station.stationName</td>
+                    <td>@sol.status</td>
+                    <td><i class="fas fa-edit"></i></td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
