@@ -23,7 +23,9 @@
                     <td>@sol.stationCode</td>
                     <td>@sol.Station.stationName</td>
 
-                    @if ((int)@sol.status == 0) { <td style="color:lawngreen">@sol.status</td>}
+                    @if ((int)@sol.status == 0) { <td style="color:green">@sol.status</td>}
+                    else if ((int)@sol.status >= 1 && (int)@sol.status <= 3) { <td style="color:red">@sol.status</td> }
+                    else { <td style="color:orange">@sol.status</td> }
 
                     <td><a href="@Url.Action("Edit", "Home", new { stationCode = sol.stationCode })"><i class="fas fa-edit"></i></a></td>
                 </tr>

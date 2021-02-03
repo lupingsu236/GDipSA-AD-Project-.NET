@@ -85,5 +85,24 @@ namespace SA51ADWebApp1.Controllers
                 return RedirectToAction("Dashboard");
             }
         }
+        public IActionResult Cancel(int lineID)
+        {
+            if (lineID == 3)
+            {
+                return RedirectToAction("CCLine");
+            }
+            else if (lineID == 1)
+            {
+                return RedirectToAction("EWLine");
+            }
+            else if (lineID == 2)
+            {
+                return RedirectToAction("NSLine");
+            }
+            else
+            {
+                return RedirectToAction("Dashboard");
+            }
+        }
     }
 }
