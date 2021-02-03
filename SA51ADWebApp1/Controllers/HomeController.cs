@@ -30,6 +30,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult NSLine()
         {
             ViewData["Title"] = "NS Line";
+            ViewBag.LineCode = "NS";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("North-South Line");
             ViewBag.Line = stationOnLineList;
             return View("Line");
@@ -38,6 +39,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult EWLine()
         {
             ViewData["Title"] = "EW Line";
+            ViewBag.LineCode = "EW";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("East-West Line");
             ViewBag.Line = stationOnLineList;
             return View("Line");
@@ -45,6 +47,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult CCLine()
         {
             ViewData["Title"] = "CC Line";
+            ViewBag.LineCode = "CC";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("Circle Line");
             ViewBag.Line = stationOnLineList;
             return View("Line");
@@ -54,6 +57,13 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Edit(String stationCode)
+        {
+            StationOnLine specificStation = solService.getSpecificStationOnLine(stationCode);
+            ViewBag.stationDetails = specificStation;
+            return View();
         }
     }
 }

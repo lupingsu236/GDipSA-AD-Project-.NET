@@ -19,5 +19,10 @@ namespace SA51ADWebApp1.Service
             List<StationOnLine> listAll = dbcontext.StationOnLines.Where(x => x.Line.lineName == Line).OrderBy(x => x.stationCode).ToList();
             return listAll;
         }
+        public StationOnLine getSpecificStationOnLine(string stationCode)
+        {
+            StationOnLine specificStation = dbcontext.StationOnLines.Where(x => x.stationCode == stationCode).FirstOrDefault();
+            return specificStation;
+        }
     }
 }

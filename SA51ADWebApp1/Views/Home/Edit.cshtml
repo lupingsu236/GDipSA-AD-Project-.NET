@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    StationOnLine s = ViewBag.stationDetails;
+}
+
+<h3>Edit page</h3>
+<div>
+    <table class="table">
+        <tr>
+            <td>Station Code</td>
+            <td>@s.stationCode</td>
+        </tr>
+        <tr>
+            <td>Station Name</td>
+            <td>@s.Station.stationName</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@s.status</td>
+        </tr>
+        <tr>
+            <td>Time To Next Station</td>
+            <td>@s.timeToNextStation</td>
+        </tr>
+        <tr>
+            <td>Time To Opposite Station</td>
+            <td>@s.timeToNextStationOpp</td>
+        </tr>
+    </table>
+</div>

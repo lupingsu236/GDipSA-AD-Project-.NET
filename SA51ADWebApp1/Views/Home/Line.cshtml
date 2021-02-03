@@ -23,7 +23,7 @@
                     <td>@sol.stationCode</td>
                     <td>@sol.Station.stationName</td>
                     <td>@sol.status</td>
-                    <td><i class="fas fa-edit"></i></td>
+                    <td><a href="@Url.Action("Edit", "Home", new { stationCode = sol.stationCode })"><i class="fas fa-edit"></i></a></td>
                 </tr>
             }
         </table>

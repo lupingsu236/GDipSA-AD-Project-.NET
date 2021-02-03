@@ -9,5 +9,6 @@ namespace SA51ADWebApp1.Service
     public interface IStationOnLineService
     {
         public List<StationOnLine> getAllStationsOnLine(String Line);
+        public StationOnLine getSpecificStationOnLine(String stationCode);
     }
 }
