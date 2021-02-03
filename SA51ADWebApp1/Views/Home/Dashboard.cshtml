@@ -22,13 +22,13 @@
     <div class="card-columns align-content-center text-center">
         @foreach (var line in lines)
         {
-
             @if ((int)line.status >= 1 && (int)line.status <= 3)
             {
                 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
                         <h5 class="card-title">@line.status</h5>
+                        <a href="@Url.Action("Edit", "Home", new { stationCode = line.stationCode })" class="stretched-link"></a>
                     </div>
                 </div>
             }
@@ -38,6 +38,7 @@
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
                         <h5 class="card-title">@line.status</h5>
+                        <a href="@Url.Action("Edit", "Home", new { stationCode = line.stationCode })" class="stretched-link"></a>
                     </div>
                 </div>
             }
