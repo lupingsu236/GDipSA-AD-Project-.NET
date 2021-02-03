@@ -9,6 +9,6 @@ namespace SA51ADWebApp1.Service
 {
     public interface IAdminService
     {
-        public Boolean validLogin(String username, String password);
+        public Boolean validateUser(String username, String password);
     }
 }

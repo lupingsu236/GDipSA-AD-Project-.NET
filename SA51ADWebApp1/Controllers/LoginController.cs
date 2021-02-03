@@ -30,7 +30,7 @@ namespace SA51ADWebApp1.Controllers
         [HttpPost]
         public IActionResult ValidateLogin(Admin newLogin)
         {
-            if (adminService.validLogin(newLogin.username, newLogin.password))
+            if (adminService.validateUser(newLogin.username, newLogin.password))
             {
                 string sessionId = System.Guid.NewGuid().ToString();
                 CookieOptions options = new CookieOptions();
@@ -55,6 +55,7 @@ namespace SA51ADWebApp1.Controllers
             }
             else
             {
+                //clearSessionsAndCookies
                 Response.Cookies.Delete("sessionId");
                 return View("Logout");
             }

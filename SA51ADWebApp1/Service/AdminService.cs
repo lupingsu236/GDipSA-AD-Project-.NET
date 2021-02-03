@@ -14,7 +14,7 @@ namespace SA51ADWebApp1.Service
         {
             this.dbcontext = dbcontext;
         }
-        public Boolean validLogin(String username, String password)
+        public Boolean validateUser(String username, String password)
         {
             Admin inDatabase = dbcontext.Admins.Where(x => x.username == username && x.password == password).FirstOrDefault();
             if (inDatabase == null) { return false; }
