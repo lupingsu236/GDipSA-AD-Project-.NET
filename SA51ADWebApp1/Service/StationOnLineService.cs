@@ -14,6 +14,13 @@ namespace SA51ADWebApp1.Service
         {
             this.dbcontext = dbcontext;
         }
+
+        public List<StationOnLine> getAllNonOperational()
+        {
+            List<StationOnLine> nonOperationalLines = dbcontext.StationOnLines.Where(x => (int)x.status != 0).ToList();
+            return nonOperationalLines;
+        }
+
         public List<StationOnLine> getAllStationsOnLine(string Line)
         {
             List<StationOnLine> listAll = dbcontext.StationOnLines.Where(x => x.Line.lineName == Line).OrderBy(x => x.stationCode).ToList();

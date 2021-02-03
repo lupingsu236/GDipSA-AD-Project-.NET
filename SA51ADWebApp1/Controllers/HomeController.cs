@@ -24,6 +24,8 @@ namespace SA51ADWebApp1.Controllers
         }
         public IActionResult Dashboard()
         {
+            List<StationOnLine> nonOperationalLines = solService.getAllNonOperational();
+            ViewBag.faultyLines = nonOperationalLines;
             return View();
         }
 

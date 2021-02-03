@@ -11,5 +11,6 @@ namespace SA51ADWebApp1.Service
         public void saveEdit(StationOnLine sol);
         public List<StationOnLine> getAllStationsOnLine(String Line);
         public StationOnLine getSpecificStationOnLine(String stationCode);
+        public List<StationOnLine> getAllNonOperational();
     }
 }
