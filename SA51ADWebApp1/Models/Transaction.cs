@@ -24,6 +24,9 @@ namespace SA51ADWebApp1.Models
         public string newStatusOfStation { get; set; }
 
         [Required]
+        public string direction { get; set; }
+
+        [Required]
         public DateTime transactionTime { get; set; }
 
         [Required]

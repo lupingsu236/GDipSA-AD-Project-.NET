@@ -26,7 +26,10 @@ namespace SA51ADWebApp1.Models
         public virtual Line Line { get; set; }
 
         [Required]
-        public string status { get; set; }
+        public Status status { get; set; }
+
+        [Required]
+        public string oppStatus { get; set; }
 
         [Required]
         public int timeToNextStation { get; set; }

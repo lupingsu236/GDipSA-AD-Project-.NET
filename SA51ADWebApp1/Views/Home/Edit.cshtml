@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StationOnLine
+@{
+}
+
+<h3>Edit page</h3>
+<div>
+    <form method="post" asp-controller="Home" asp-action="Edit">
+        <table class="table">
+            <tr>
+                <td>Station Code</td>
+                <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
+            </tr>
+            <tr>
+                <td>Station Name</td>
+                <td>@Model.Station.stationName</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
+                    <select class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Time To Next Station</td>
+                <td><input class="form-control" type="number" name="timeToNextStation" value=@Model.timeToNextStation.ToString() /></td>
+            </tr>
+            <tr>
+                <td>Time To Opposite Station</td>
+                <td><input class="form-control" type="number" name="timeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() /></td>
+            </tr>
+        </table>
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="StationId" value="@Model.StationId" />
+        <input type="hidden" name="LineId" value="@Model.LineId" />
+        <input type="hidden" name="oppStatus" value="@Model.oppStatus" />
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </form>
+</div>
