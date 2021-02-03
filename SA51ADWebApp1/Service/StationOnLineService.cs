@@ -24,5 +24,11 @@ namespace SA51ADWebApp1.Service
             StationOnLine specificStation = dbcontext.StationOnLines.Where(x => x.stationCode == stationCode).FirstOrDefault();
             return specificStation;
         }
+
+        public void saveEdit(StationOnLine sol)
+        {
+            dbcontext.Update(sol);
+            dbcontext.SaveChanges();
+        }
     }
 }

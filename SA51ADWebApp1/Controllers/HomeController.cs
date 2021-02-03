@@ -62,8 +62,28 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult Edit(String stationCode)
         {
             StationOnLine specificStation = solService.getSpecificStationOnLine(stationCode);
-            ViewBag.stationDetails = specificStation;
-            return View();
+            return View(specificStation);
+        }
+        [HttpPost]
+        public IActionResult Edit(StationOnLine sol)
+        {
+            solService.saveEdit(sol);
+            if (sol.LineId == 3)
+            {
+                return RedirectToAction("CCLine");
+            }
+            else if (sol.LineId == 1)
+            {
+                return RedirectToAction("EWLine");
+            }
+            else if (sol.LineId == 2)
+            {
+                return RedirectToAction("NSLine");
+            }
+            else
+            {
+                return RedirectToAction("Dashboard");
+            }
         }
     }
 }

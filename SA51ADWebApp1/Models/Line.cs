@@ -9,7 +9,7 @@ namespace SA51ADWebApp1.Models
 {
     public class Line
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]

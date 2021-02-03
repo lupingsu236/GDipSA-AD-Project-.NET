@@ -8,6 +8,7 @@ namespace SA51ADWebApp1.Service
 {
     public interface IStationOnLineService
     {
+        public void saveEdit(StationOnLine sol);
         public List<StationOnLine> getAllStationsOnLine(String Line);
         public StationOnLine getSpecificStationOnLine(String stationCode);
     }
