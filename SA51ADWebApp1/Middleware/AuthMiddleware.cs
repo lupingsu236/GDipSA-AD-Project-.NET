@@ -19,7 +19,7 @@ namespace SA51ADWebApp1.Middleware
         {
             string controller = (string)context.Request.RouteValues["controller"];
 
-            if (controller != "Login")
+            if (controller != "Login" && controller != "StationOnLines")
             {
                 string sessionId = context.Request.Cookies["sessionId"];
                 if (sessionId == null)
