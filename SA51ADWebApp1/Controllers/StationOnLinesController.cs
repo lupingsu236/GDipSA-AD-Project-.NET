@@ -12,6 +12,7 @@ namespace SA51ADWebApp1.Controllers
     [ApiController]
     public class StationOnLinesController : ControllerBase
     {
+        private const string V = "From API";
         private readonly Database context;
 
         public StationOnLinesController(Database context)
@@ -24,6 +25,14 @@ namespace SA51ADWebApp1.Controllers
         public async Task<ActionResult<IEnumerable<StationOnLine>>> GetTodoItems()
         {
             return await context.StationOnLines.ToListAsync();
+        }
+
+        // GET: api/StationOnLines
+        [Route("/api/string")]
+        [HttpGet]
+        public async Task<ActionResult<string>> GetString()
+        {
+            return V;
         }
     }
 }
