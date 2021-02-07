@@ -12,7 +12,6 @@ namespace SA51ADWebApp1.Controllers
     [ApiController]
     public class StationOnLinesController : ControllerBase
     {
-        private const string V = "From API";
         private readonly Database context;
 
         public StationOnLinesController(Database context)
@@ -30,9 +29,9 @@ namespace SA51ADWebApp1.Controllers
         // GET: api/StationOnLines
         [Route("/api/string")]
         [HttpGet]
-        public async Task<ActionResult<string>> GetString()
+        public async Task<ActionResult<Class>> GetGreeting()
         {
-            return V;
+            return new Class{ Name = "Jon", Greeting = "Hello" };
         }
     }
 }
