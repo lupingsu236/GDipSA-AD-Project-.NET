@@ -4,40 +4,93 @@
 @model StationOnLine
 @{
 }
+<html>
+<head>
+    <script>
+    function statusselect0to6(index) {
+        if (index == 0 || index == 1) {
+            document.getElementById("inputnextstationtime").readOnly = true;
+            document.getElementById("inputoppstationtime").readOnly = true;
+            if (index == 0) {
+                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+            }
+            if (index == 1) {
+                document.getElementById("inputnextstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputoppstationtime").value = (2147483647 - 1000);
+            }
+        }
+        else {
+            document.getElementById("inputnextstationtime").readOnly = false;
+            document.getElementById("inputoppstationtime").readOnly = false;
+            if (index == 4) {
+                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+            }
+            if (index == 2) {
+                document.getElementById("inputnextstationtime").readOnly = true;
+                document.getElementById("inputnextstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+            }
+            if (index == 3) {
+                document.getElementById("inputoppstationtime").readOnly = true;
+                document.getElementById("inputoppstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+            }
+            if (index == 5) {
+                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                document.getElementById("inputoppstationtime").readOnly = true;
+                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+            }
+            if (index == 6) {
+                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+                document.getElementById("inputnextstationtime").readOnly = true;
+                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+            }
+        }
 
-<h3>Edit page</h3>
-<div>
-    <form method="post" asp-controller="Home" asp-action="Edit">
-        <table class="table">
-            <tr>
-                <td>Station Code</td>
-                <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
-            </tr>
-            <tr>
-                <td>Station Name</td>
-                <td>@Model.Station.stationName</td>
-            </tr>
-            <tr>
-                <td>Status</td>
-                <td>
-                    @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
-                    <select class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>Time To Next Station</td>
-                <td><input class="form-control" type="number" name="timeToNextStation" value=@Model.timeToNextStation.ToString() /></td>
-            </tr>
-            <tr>
-                <td>Time To Opposite Station</td>
-                <td><input class="form-control" type="number" name="timeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() /></td>
-            </tr>
-        </table>
-        <input type="hidden" name="Id" value="@Model.Id" />
-        <input type="hidden" name="StationId" value="@Model.StationId" />
-        <input type="hidden" name="LineId" value="@Model.LineId" />
-        <input type="hidden" name="oppStatus" value="@Model.oppStatus" />
-        <input type="submit" value="Save" class="btn btn-primary" />
-        <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Home", new { lineID = Model.LineId})'">
-    </form>
-</div>
+    }
+    </script>
+</head>
+
+<body onload="statusselect0to6(document.getElementById('selectStatus').selectedIndex)">
+    <h3>Edit page</h3>
+    <div>
+        <form method="post" asp-controller="Home" asp-action="Edit">
+            <table class="table">
+                <tr>
+                    <td>Station Code</td>
+                    <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
+                </tr>
+                <tr>
+                    <td>Station Name</td>
+                    <td>@Model.Station.stationName</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>
+                        @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
+                        <select id="selectStatus" onchange="statusselect0to6(this.selectedIndex)" class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
+                    </td>
+                </tr>
+                <tr id="nextstationtime">
+                    <td>Time To Next Station</td>
+                    <td><input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() /></td>
+                </tr>
+                <tr id="oppstationtime">
+                    <td>Time To Opposite Station</td>
+                    <td><input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() /></td>
+                </tr>
+            </table>
+            <input type="hidden" name="timeToNextStation" value="@Model.timeToNextStation" />
+            <input type="hidden" name="timeToNextStationOpp" value="@Model.timeToNextStationOpp" />
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="StationId" value="@Model.StationId" />
+            <input type="hidden" name="LineId" value="@Model.LineId" />
+            <input type="hidden" name="oppStatus" value="@Model.oppStatus" />
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Home", new { lineID = Model.LineId})'">
+        </form>
+    </div>
+</body>
+</html>

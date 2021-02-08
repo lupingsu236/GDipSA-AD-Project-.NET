@@ -12,16 +12,16 @@ namespace SA51ADWebApp1.Repository
         {
             Admin admin1 = new Admin();
             admin1.username = "jon";
-            admin1.password = "password";
+            admin1.setPasswordAndSalt("password");
             Admin admin2 = new Admin();
             admin2.username = "zhenli";
-            admin2.password = "password";
+            admin2.setPasswordAndSalt("password");
             Admin admin3 = new Admin();
             admin3.username = "sulp";
-            admin3.password = "password";
+            admin3.setPasswordAndSalt("password");
             Admin admin4 = new Admin();
             admin4.username = "justin";
-            admin4.password = "password";
+            admin4.setPasswordAndSalt("password");
             db.Add(admin1); db.Add(admin2); db.Add(admin3); db.Add(admin4);
 
             Line yellowLine = new Line();
