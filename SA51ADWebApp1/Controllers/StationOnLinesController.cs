@@ -21,9 +21,19 @@ namespace SA51ADWebApp1.Controllers
 
         // GET: api/StationOnLines
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StationOnLine>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<StationOnLineJson>>> GetTodoItems()
         {
-            return await context.StationOnLines.ToListAsync();
+            return await context.StationOnLines.Where(x => x.status != Status.Operational).
+                Select(x => new StationOnLineJson
+                {
+                    stationCode = x.stationCode,
+                    stationName = x.Station.stationName,
+                    status = x.status,
+                    lineName = x.Line.lineName,
+                    timeToNextStation = x.timeToNextStation,
+                    timeToNextStationOpp = x.timeToNextStationOpp
+                })
+                .ToListAsync();
         }
 
         // GET: api/StationOnLines
@@ -31,7 +41,7 @@ namespace SA51ADWebApp1.Controllers
         [HttpGet]
         public async Task<ActionResult<Class>> GetGreeting()
         {
-            return new Class{ Name = "Jon", Greeting = "Hello" };
+            return new Class { Name = "Jon", Greeting = "Hello" };
         }
     }
 }
