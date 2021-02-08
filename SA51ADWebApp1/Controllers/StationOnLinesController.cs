@@ -30,8 +30,8 @@ namespace SA51ADWebApp1.Controllers
                     stationName = x.Station.stationName,
                     status = x.status,
                     lineName = x.Line.lineName,
-                    timeToNextStation = x.timeToNextStation,
-                    timeToNextStationOpp = x.timeToNextStationOpp
+                    timeToNextStation = x.editedTimeToNextStation,
+                    timeToNextStationOpp = x.editedTimeToNextStationOpp
                 })
                 .ToListAsync();
         }
