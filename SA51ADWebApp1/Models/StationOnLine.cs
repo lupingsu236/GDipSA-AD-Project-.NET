@@ -37,6 +37,10 @@ namespace SA51ADWebApp1.Models
         [Required]
         public int timeToNextStationOpp { get; set; }
 
+        public int editedTimeToNextStation { get; set; }
+
+        public int editedTimeToNextStationOpp { get; set; }
+
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

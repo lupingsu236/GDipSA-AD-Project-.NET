@@ -70,6 +70,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult Edit(StationOnLine sol)
         {
             solService.saveEdit(sol);
+            TempData["Success"] = "Added Successfully!";
             if (sol.LineId == 3)
             {
                 return RedirectToAction("CCLine");
