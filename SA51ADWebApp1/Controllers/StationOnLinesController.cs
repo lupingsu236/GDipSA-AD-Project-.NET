@@ -28,20 +28,10 @@ namespace SA51ADWebApp1.Controllers
                 {
                     stationCode = x.stationCode,
                     stationName = x.Station.stationName,
-                    status = x.status,
-                    lineName = x.Line.lineName,
                     timeToNextStation = x.editedTimeToNextStation,
                     timeToNextStationOpp = x.editedTimeToNextStationOpp
                 })
                 .ToListAsync();
-        }
-
-        // GET: api/StationOnLines
-        [Route("/api/string")]
-        [HttpGet]
-        public async Task<ActionResult<Class>> GetGreeting()
-        {
-            return new Class { Name = "Jon", Greeting = "Hello" };
         }
     }
 }

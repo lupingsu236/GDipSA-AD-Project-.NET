@@ -11,10 +11,6 @@ namespace SA51ADWebApp1.Models
 
         public string stationName { get; set; }
 
-        public string lineName { get; set; }
-
-        public Status status { get; set; }
-
         public int timeToNextStation { get; set; }
 
         public int timeToNextStationOpp { get; set; }
