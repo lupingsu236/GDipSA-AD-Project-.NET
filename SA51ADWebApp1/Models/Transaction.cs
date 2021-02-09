@@ -28,6 +28,6 @@ namespace SA51ADWebApp1.Models
         [Required]
         public DateTime transactionTime { get; set; }
 
-        public string notes { get; set; }
+        //public string notes { get; set; }
     }
 }
