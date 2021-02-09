@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace SA51ADWebApp1.Models
 {
-    public class StationOnLineJson
+    public class NewsJson
     {
+        public string Time { get; set; }
         public string StationCode { get; set; }
-
         public string StationName { get; set; }
-
+        public string CurrentStatus { get; set; }
         public int TimeToNextStation { get; set; }
-
         public int TimeToNextStationOpp { get; set; }
     }
 }
-
