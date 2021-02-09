@@ -10,7 +10,7 @@ namespace SA51ADWebApp1.Models
         public string Time { get; set; }
         public string StationCode { get; set; }
         public string StationName { get; set; }
-        public string CurrentStatus { get; set; }
+        public Status CurrentStatus { get; set; }
         public int TimeToNextStation { get; set; }
         public int TimeToNextStationOpp { get; set; }
     }
