@@ -31,6 +31,7 @@ namespace SA51ADWebApp1
             services.AddControllersWithViews();
             services.AddSession(); //sessions
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<IStationOnLineService, StationOnLineService>();
             services.AddDbContext<Database>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DbConn")));
             //services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

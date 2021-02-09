@@ -48,6 +48,12 @@
                 document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
             }
         }
+        if (@Model.timeToNextStation == 0) {
+            document.getElementById("inputnextstationtime").readOnly = true;
+        }
+        if (@Model.timeToNextStationOpp == 0) {
+            document.getElementById("inputoppstationtime").readOnly = true;
+        }
 
     }
     </script>

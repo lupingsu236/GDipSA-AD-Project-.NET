@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SA51ADWebApp1.Models;
 using SA51ADWebApp1.Service;
@@ -15,12 +16,14 @@ namespace SA51ADWebApp1.Controllers
         private readonly ILogger<HomeController> _logger;
         protected IAdminService adminService;
         protected IStationOnLineService solService;
+        protected ITransactionService transService;
 
-        public HomeController(ILogger<HomeController> logger, IAdminService adminService, IStationOnLineService solService)
+        public HomeController(ILogger<HomeController> logger, IAdminService adminService, IStationOnLineService solService, ITransactionService transService)
         {
             _logger = logger;
             this.adminService = adminService;
             this.solService = solService;
+            this.transService = transService;
         }
         public IActionResult Dashboard()
         {
@@ -69,6 +72,9 @@ namespace SA51ADWebApp1.Controllers
         [HttpPost]
         public IActionResult Edit(StationOnLine sol)
         {
+            string userIdString = Request.Cookies["sessionId"];
+            int userId = Convert.ToInt32(userIdString);
+            transService.saveTransaction(sol, userId);
             solService.saveEdit(sol);
             TempData["Success"] = "Added Successfully!";
             if (sol.LineId == 3)

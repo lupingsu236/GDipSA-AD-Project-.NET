@@ -13,6 +13,13 @@ namespace SA51ADWebApp1.Service
         {
             this.dbcontext = dbcontext;
         }
+
+        public int getValidUserId(string username)
+        {
+            int validUserId = dbcontext.Admins.Where(x => x.username == username).FirstOrDefault().Id;
+            return validUserId;
+        }
+
         public Boolean validateUser(String username, String password)
         {
             byte[] storedSalt = dbcontext.Admins.Where(x => x.username == username).FirstOrDefault().salt;
