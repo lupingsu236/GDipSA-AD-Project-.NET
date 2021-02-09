@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 
 namespace SA51ADWebApp1.Controllers
 {
-    [Route("api")]
+    [Route("api/StationOnLines")]
     [ApiController]
-    public class APIController : ControllerBase
+    public class StationOnLinesController : ControllerBase
     {
         private readonly Database context;
 
-        public APIController(Database context)
+        public StationOnLinesController(Database context)
         {
             this.context = context;
         }
 
-        [Route("NonOperationalStations")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StationOnLineJson>>> GetNonOperationalStationsOnLines()
         {
@@ -34,22 +33,22 @@ namespace SA51ADWebApp1.Controllers
                 .ToListAsync();
         }
 
-        [Route("News")]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<NewsJson>>> GetLatestNews()
-        {
-            return await context.Transactions.Where(x => x.newStatusOfStation != "Operational").
-                Select(x => new NewsJson
-                {
-                    Time = x.transactionTime.ToString(),
-                    StationCode = x.StationOnLine.stationCode,
-                    StationName = x.StationOnLine.Station.stationName,
-                    CurrentStatus = x.newStatusOfStation, 
-                    TimeToNextStation = x.StationOnLine.editedTimeToNextStation,
-                    TimeToNextStationOpp = x.StationOnLine.editedTimeToNextStationOpp
-                })
-                .OrderBy(x => x.Time)
-                .ToListAsync();
-        }
+        //[Route("News")]
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<NewsJson>>> GetLatestNews()
+        //{
+        //    return await context.Transactions.Where(x => x.newStatusOfStation != "Operational").
+        //        Select(x => new NewsJson
+        //        {
+        //            Time = x.transactionTime.ToString(),
+        //            StationCode = x.StationOnLine.stationCode,
+        //            StationName = x.StationOnLine.Station.stationName,
+        //            CurrentStatus = x.newStatusOfStation, 
+        //            TimeToNextStation = x.StationOnLine.editedTimeToNextStation,
+        //            TimeToNextStationOpp = x.StationOnLine.editedTimeToNextStationOpp
+        //        })
+        //        .OrderBy(x => x.Time)
+        //        .ToListAsync();
+        //}
     }
 }
