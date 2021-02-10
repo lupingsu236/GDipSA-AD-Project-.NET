@@ -7,7 +7,13 @@
 <html>
 <head>
     <script>
-    function statusselect0to6(index) {
+        function statusselect0to6(index) {
+            document.getElementById("inputnextstationtime").style.display = "inline";
+            document.getElementById("inputoppstationtime").style.display = "inline";
+            document.getElementById("breakdownNext").style.display = "none";
+            document.getElementById("breakdownOpp").style.display = "none";
+            document.getElementById("endStationNext").style.display = "none";
+            document.getElementById("endStationOpp").style.display = "none";
         if (index == 0 || index == 1) {
             document.getElementById("inputnextstationtime").readOnly = true;
             document.getElementById("inputoppstationtime").readOnly = true;
@@ -17,7 +23,15 @@
             }
             if (index == 1) {
                 document.getElementById("inputnextstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputnextstationtime").style.display = "none";
+                if (@Model.timeToNextStation != 0) {
+                    document.getElementById("breakdownNext").style.display = "inline";
+                }
                 document.getElementById("inputoppstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputoppstationtime").style.display = "none";
+                if (@Model.timeToNextStationOpp != 0) {
+                    document.getElementById("breakdownOpp").style.display = "inline";
+                }
             }
         }
         else {
@@ -30,11 +44,19 @@
             if (index == 2) {
                 document.getElementById("inputnextstationtime").readOnly = true;
                 document.getElementById("inputnextstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputnextstationtime").style.display = "none";
+                if (@Model.timeToNextStation != 0) {
+                    document.getElementById("breakdownNext").style.display = "inline";
+                }
                 document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
             }
             if (index == 3) {
                 document.getElementById("inputoppstationtime").readOnly = true;
                 document.getElementById("inputoppstationtime").value = (2147483647 - 1000);
+                document.getElementById("inputoppstationtime").style.display = "none";
+                if (@Model.timeToNextStationOpp != 0) {
+                    document.getElementById("breakdownOpp").style.display = "inline";
+                }
                 document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
             }
             if (index == 5) {
@@ -49,10 +71,12 @@
             }
         }
         if (@Model.timeToNextStation == 0) {
-            document.getElementById("inputnextstationtime").readOnly = true;
+            document.getElementById("inputnextstationtime").style.display = "none";
+            document.getElementById("endStationNext").style.display = "inline";
         }
         if (@Model.timeToNextStationOpp == 0) {
-            document.getElementById("inputoppstationtime").readOnly = true;
+            document.getElementById("inputoppstationtime").style.display = "none";
+            document.getElementById("endStationOpp").style.display = "inline";
         }
 
     }
@@ -81,11 +105,15 @@
                 </tr>
                 <tr id="nextstationtime">
                     <td>Time To Next Station</td>
-                    <td><input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() /></td>
+                    <td><input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
+                    <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly/>
+                    <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly/></td>
                 </tr>
                 <tr id="oppstationtime">
                     <td>Time To Opposite Station</td>
-                    <td><input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() /></td>
+                    <td><input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
+                    <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
+                    <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly /></td>
                 </tr>
             </table>
             <input type="hidden" name="timeToNextStation" value="@Model.timeToNextStation" />
