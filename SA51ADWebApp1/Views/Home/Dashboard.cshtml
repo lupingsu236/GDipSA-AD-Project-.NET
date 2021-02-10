@@ -27,7 +27,7 @@
                 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
-                        <h5 class="card-title">@line.status</h5>
+                        <h5 class="card-title" style="font-size: 15px">@line.status</h5>
                         <a href="@Url.Action("Edit", "Home", new { stationCode = line.stationCode })" class="stretched-link"></a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
-                        <h5 class="card-title">@line.status</h5>
+                        <h5 class="card-title" style="font-size: 15px">@line.status</h5>
                         <a href="@Url.Action("Edit", "Home", new { stationCode = line.stationCode })" class="stretched-link"></a>
                     </div>
                 </div>
