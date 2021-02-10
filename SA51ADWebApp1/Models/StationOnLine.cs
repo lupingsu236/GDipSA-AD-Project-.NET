@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SA51ADWebApp1.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -37,8 +38,10 @@ namespace SA51ADWebApp1.Models
         [Required]
         public int timeToNextStationOpp { get; set; }
 
+        [isPositive]
         public int editedTimeToNextStation { get; set; }
 
+        [isPositive]
         public int editedTimeToNextStationOpp { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
