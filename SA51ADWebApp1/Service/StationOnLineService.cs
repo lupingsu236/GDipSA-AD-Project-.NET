@@ -37,5 +37,12 @@ namespace SA51ADWebApp1.Service
             dbcontext.Update(sol);
             dbcontext.SaveChanges();
         }
+
+        public string getSpecificStationName(String stationCode)
+        {
+            StationOnLine specificStation = dbcontext.StationOnLines.Where(x => x.stationCode == stationCode).FirstOrDefault();
+            List<Station> stationall=dbcontext.Stations.Where(x => x.StationOnLines.Contains(specificStation)).ToList();
+            return stationall.FirstOrDefault().stationName;
+        }
     }
 }
