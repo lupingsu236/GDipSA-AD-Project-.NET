@@ -105,15 +105,21 @@
                 </tr>
                 <tr id="nextstationtime">
                     <td>Time To Next Station</td>
-                    <td><input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
-                    <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly/>
-                    <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly/></td>
+                    <td>
+                        <input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
+                        <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
+                        <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly />
+                        <span asp-validation-for="editedTimeToNextStation" class="text-danger"></span>
+                    </td>
                 </tr>
                 <tr id="oppstationtime">
                     <td>Time To Opposite Station</td>
-                    <td><input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
-                    <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
-                    <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly /></td>
+                    <td>
+                        <input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
+                        <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
+                        <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly />
+                        <span asp-validation-for="editedTimeToNextStationOpp" class="text-danger"></span>
+                    </td>
                 </tr>
             </table>
             <input type="hidden" name="timeToNextStation" value="@Model.timeToNextStation" />

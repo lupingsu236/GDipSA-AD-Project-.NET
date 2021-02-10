@@ -72,6 +72,12 @@ namespace SA51ADWebApp1.Controllers
         [HttpPost]
         public IActionResult Edit(StationOnLine sol)
         {
+            if (!ModelState.IsValid)
+            {
+                StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
+                sol.Station = specificStation.Station;
+                return View(sol);
+            }
             string userIdString = Request.Cookies["sessionId"];
             int userId = Convert.ToInt32(userIdString);
             transService.saveTransaction(sol, userId);
