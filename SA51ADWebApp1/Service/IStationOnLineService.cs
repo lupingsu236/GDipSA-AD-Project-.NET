@@ -12,5 +12,6 @@ namespace SA51ADWebApp1.Service
         public List<StationOnLine> getAllStationsOnLine(String Line);
         public StationOnLine getSpecificStationOnLine(String stationCode);
         public List<StationOnLine> getAllNonOperational();
+        public string getSpecificStationName(string stationCode);
     }
 }
