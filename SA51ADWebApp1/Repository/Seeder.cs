@@ -12,16 +12,16 @@ namespace SA51ADWebApp1.Repository
         {
             Admin admin1 = new Admin();
             admin1.username = "jon";
-            admin1.password = "password";
+            admin1.setPasswordAndSalt("password");
             Admin admin2 = new Admin();
             admin2.username = "zhenli";
-            admin2.password = "password";
+            admin2.setPasswordAndSalt("password");
             Admin admin3 = new Admin();
             admin3.username = "sulp";
-            admin3.password = "password";
+            admin3.setPasswordAndSalt("password");
             Admin admin4 = new Admin();
             admin4.username = "justin";
-            admin4.password = "password";
+            admin4.setPasswordAndSalt("password");
             db.Add(admin1); db.Add(admin2); db.Add(admin3); db.Add(admin4);
 
             Line yellowLine = new Line();
@@ -230,12 +230,12 @@ namespace SA51ADWebApp1.Repository
             NS28.status = Status.Operational; NS28.oppStatus = "Operational"; NS28.timeToNextStation = 3; NS28.timeToNextStationOpp = 0;
             db.Add(NS28);
 
-            StationOnLine CG1 = new StationOnLine(); CG1.LineId = greenLine.Id; CG1.StationId = Expo.Id; CG1.stationCode = "CG01";
-            CG1.status = Status.Operational; CG1.oppStatus = "Operational"; CG1.timeToNextStation = 4; CG1.timeToNextStationOpp = 3;
-            db.Add(CG1);
-            StationOnLine CG2 = new StationOnLine(); CG2.LineId = greenLine.Id; CG2.StationId = ChangiAirport.Id; CG2.stationCode = "CG02";
-            CG2.status = Status.Operational; CG2.oppStatus = "Operational"; CG2.timeToNextStation = 0; CG2.timeToNextStationOpp = 4;
-            db.Add(CG2);
+            //StationOnLine CG1 = new StationOnLine(); CG1.LineId = greenLine.Id; CG1.StationId = Expo.Id; CG1.stationCode = "CG01";
+            //CG1.status = Status.Operational; CG1.oppStatus = "Operational"; CG1.timeToNextStation = 4; CG1.timeToNextStationOpp = 3;
+            //db.Add(CG1);
+            //StationOnLine CG2 = new StationOnLine(); CG2.LineId = greenLine.Id; CG2.StationId = ChangiAirport.Id; CG2.stationCode = "CG02";
+            //CG2.status = Status.Operational; CG2.oppStatus = "Operational"; CG2.timeToNextStation = 0; CG2.timeToNextStationOpp = 4;
+            //db.Add(CG2);
             StationOnLine EW1 = new StationOnLine(); EW1.LineId = greenLine.Id; EW1.StationId = PasirRis.Id; EW1.stationCode = "EW01";
             EW1.status = Status.Operational; EW1.oppStatus = "Operational"; EW1.timeToNextStation = 0; EW1.timeToNextStationOpp = 3;
             db.Add(EW1);
@@ -420,12 +420,12 @@ namespace SA51ADWebApp1.Repository
             StationOnLine CC29 = new StationOnLine(); CC29.LineId = yellowLine.Id; CC29.StationId = HarbourFront.Id; CC29.stationCode = "CC29";
             CC29.status = Status.Operational; CC29.oppStatus = "Operational"; CC29.timeToNextStation = 2; CC29.timeToNextStationOpp = 0;
             db.Add(CC29);
-            StationOnLine CE1 = new StationOnLine(); CE1.LineId = yellowLine.Id; CE1.StationId = Bayfront.Id; CE1.stationCode = "CE01";
-            CE1.status = Status.Operational; CE1.oppStatus = "Operational"; CE1.timeToNextStation = 2; CE1.timeToNextStationOpp = 2;
-            db.Add(CE1);
-            StationOnLine CE2 = new StationOnLine(); CE2.LineId = yellowLine.Id; CE2.StationId = MarinaBay.Id; CE2.stationCode = "CE02";
-            CE2.status = Status.Operational; CE2.oppStatus = "Operational"; CE2.timeToNextStation = 2; CE2.timeToNextStationOpp = 0;
-            db.Add(CE2);
+            //StationOnLine CE1 = new StationOnLine(); CE1.LineId = yellowLine.Id; CE1.StationId = Bayfront.Id; CE1.stationCode = "CE01";
+            //CE1.status = Status.Operational; CE1.oppStatus = "Operational"; CE1.timeToNextStation = 2; CE1.timeToNextStationOpp = 2;
+            //db.Add(CE1);
+            //StationOnLine CE2 = new StationOnLine(); CE2.LineId = yellowLine.Id; CE2.StationId = MarinaBay.Id; CE2.stationCode = "CE02";
+            //CE2.status = Status.Operational; CE2.oppStatus = "Operational"; CE2.timeToNextStation = 2; CE2.timeToNextStationOpp = 0;
+            //db.Add(CE2);
 
             //find a way to stream from CVS in to this.
             //object item = inputstream....
