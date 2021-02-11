@@ -11,7 +11,7 @@ namespace SA51ADWebApp1.Validation
         public isPositiveAttribute()
         {
         }
-        public string GetErrorMessage() => $"Please only enter positive integers between 0 to 2 billion (breakdown).";
+        public string GetErrorMessage() => $"Please only enter positive integers between 0 to 9999.";
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             int time = Convert.ToInt32(value);
