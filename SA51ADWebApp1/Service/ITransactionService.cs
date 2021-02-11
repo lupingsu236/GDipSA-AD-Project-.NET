@@ -10,5 +10,6 @@ namespace SA51ADWebApp1.Service
     public interface ITransactionService
     {
         public void saveTransaction(StationOnLine sol, int userId);
+        public List<Transaction> getAllTransactionsAtStation(StationOnLine sol);
     }
 }

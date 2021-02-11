@@ -65,6 +65,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult Edit(String stationCode)
         {
             StationOnLine specificStation = solService.getSpecificStationOnLine(stationCode);
+            ViewBag.transactions = (List<Transaction>) transService.getAllTransactionsAtStation(specificStation);
             return View(specificStation);
         }
         [HttpPost]

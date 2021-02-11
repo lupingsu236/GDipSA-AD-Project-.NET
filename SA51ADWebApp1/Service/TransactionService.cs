@@ -2,6 +2,8 @@
 using SA51ADWebApp1.Models;
 using SA51ADWebApp1.Repository;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SA51ADWebApp1.Service
 {
@@ -11,6 +13,11 @@ namespace SA51ADWebApp1.Service
         public TransactionService(Database dbcontext)
         {
             this.dbcontext = dbcontext;
+        }
+
+        public List<Transaction> getAllTransactionsAtStation(StationOnLine sol)
+        {
+            return dbcontext.Transactions.Where(x => x.StationOnLineId == sol.Id).OrderByDescending(x => x.transactionTime).ToList();
         }
 
         public void saveTransaction(StationOnLine sol, int userId)

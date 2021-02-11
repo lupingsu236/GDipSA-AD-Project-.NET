@@ -3,17 +3,18 @@
 *@
 @model StationOnLine
 @{
-}
+        List<Transaction> tList = (List<Transaction>) ViewBag.transactions;
+    }
 <html>
 <head>
     <script>
         function statusselect0to6(index) {
-            document.getElementById("inputnextstationtime").style.display = "inline";
-            document.getElementById("inputoppstationtime").style.display = "inline";
-            document.getElementById("breakdownNext").style.display = "none";
-            document.getElementById("breakdownOpp").style.display = "none";
-            document.getElementById("endStationNext").style.display = "none";
-            document.getElementById("endStationOpp").style.display = "none";
+        document.getElementById("inputnextstationtime").style.display = "inline";
+        document.getElementById("inputoppstationtime").style.display = "inline";
+        document.getElementById("breakdownNext").style.display = "none";
+        document.getElementById("breakdownOpp").style.display = "none";
+        document.getElementById("endStationNext").style.display = "none";
+        document.getElementById("endStationOpp").style.display = "none";
         if (index == 0 || index == 1) {
             document.getElementById("inputnextstationtime").readOnly = true;
             document.getElementById("inputoppstationtime").readOnly = true;
@@ -85,52 +86,63 @@
 
 <body onload="statusselect0to6(document.getElementById('selectStatus').selectedIndex)">
     <h3>Edit page</h3>
-    <div>
-        <form method="post" asp-controller="Home" asp-action="Edit">
-            <table class="table">
-                <tr>
-                    <td>Station Code</td>
-                    <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
-                </tr>
-                <tr>
-                    <td>Station Name</td>
-                    <td>@Model.Station.stationName</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>
-                        @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
-                        <select id="selectStatus" onchange="statusselect0to6(this.selectedIndex)" class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
-                    </td>
-                </tr>
-                <tr id="nextstationtime">
-                    <td>Time To Next Station</td>
-                    <td>
-                        <input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
-                        <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
-                        <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly />
-                        <span asp-validation-for="editedTimeToNextStation" class="text-danger"></span>
-                    </td>
-                </tr>
-                <tr id="oppstationtime">
-                    <td>Time To Opposite Station</td>
-                    <td>
-                        <input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
-                        <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
-                        <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly />
-                        <span asp-validation-for="editedTimeToNextStationOpp" class="text-danger"></span>
-                    </td>
-                </tr>
-            </table>
-            <input type="hidden" name="timeToNextStation" value="@Model.timeToNextStation" />
-            <input type="hidden" name="timeToNextStationOpp" value="@Model.timeToNextStationOpp" />
-            <input type="hidden" name="Id" value="@Model.Id" />
-            <input type="hidden" name="StationId" value="@Model.StationId" />
-            <input type="hidden" name="LineId" value="@Model.LineId" />
-            <input type="hidden" name="oppStatus" value="@Model.oppStatus" />
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Home", new { lineID = Model.LineId})'">
-        </form>
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post" asp-controller="Home" asp-action="Edit">
+                <table class="table">
+                    <tr>
+                        <td>Station Code</td>
+                        <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
+                    </tr>
+                    <tr>
+                        <td>Station Name</td>
+                        <td>@Model.Station.stationName</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>
+                            @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
+                            <select id="selectStatus" onchange="statusselect0to6(this.selectedIndex)" class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
+                        </td>
+                    </tr>
+                    <tr id="nextstationtime">
+                        <td>Time To Next Station</td>
+                        <td>
+                            <input id="inputnextstationtime" class="form-control" type="number" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
+                            <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
+                            <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly />
+                            <span asp-validation-for="editedTimeToNextStation" class="text-danger"></span>
+                        </td>
+                    </tr>
+                    <tr id="oppstationtime">
+                        <td>Time To Opposite Station</td>
+                        <td>
+                            <input id="inputoppstationtime" class="form-control" type="number" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
+                            <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
+                            <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly />
+                            <span asp-validation-for="editedTimeToNextStationOpp" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="timeToNextStation" value="@Model.timeToNextStation" />
+                <input type="hidden" name="timeToNextStationOpp" value="@Model.timeToNextStationOpp" />
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="StationId" value="@Model.StationId" />
+                <input type="hidden" name="LineId" value="@Model.LineId" />
+                <input type="hidden" name="oppStatus" value="@Model.oppStatus" />
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Home", new { lineID = Model.LineId})'">
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h5>Transaction History</h5>
+            <div style="overflow:auto; height:250px;">
+                @foreach(var x in tList)
+                {
+                    <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime</p>
+                }
+            </div>
+        </div>
     </div>
 </body>
 </html>
