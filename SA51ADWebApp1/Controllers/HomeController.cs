@@ -120,7 +120,8 @@ namespace SA51ADWebApp1.Controllers
                 body = sol.stationCode + " " + stationname + " returns to be operational.";
             }
             var data = new { action = "Play", userId = 20 };
-            var tokens = new string[1] { "c0J6EgUOQf6pGOlfAgllAL:APA91bGl9xlBE7H5lKsz8wn3VebZ1tuGZGVUSoLvzGPcln8TdmibNA-uAOq-OJ8VwQJR0TcgQKex_vXzqo67lcVTDz2Wunchsu7KLMjNxTxrCK93GHbhhpBAbK66AwSrXjnKd_oiy4ej" };
+            var tokens = new string[2] {"c0J6EgUOQf6pGOlfAgllAL:APA91bGl9xlBE7H5lKsz8wn3VebZ1tuGZGVUSoLvzGPcln8TdmibNA-uAOq-OJ8VwQJR0TcgQKex_vXzqo67lcVTDz2Wunchsu7KLMjNxTxrCK93GHbhhpBAbK66AwSrXjnKd_oiy4ej",
+                                        "eGcvE4FYQH614rWtXeGCEy:APA91bEAEebP2PPzdFtmqa1F9n-yW3uAygNOCvXedUjDyj38txKn26Gh1yq6xviT5MQShizY5vJkIiekvAGLyEuBW2DVM9C09lmLANns7dF1_yNcY1s-sA6n3PC3TMK8TkEBjiXpVrXG"};
             var pushSent = NotificationService.pushNotification.SendPushNotification(tokens, title, body, data);
 
             if (sol.LineId == 3)
