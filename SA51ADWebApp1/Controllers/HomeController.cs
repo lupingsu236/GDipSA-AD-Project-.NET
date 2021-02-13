@@ -78,6 +78,19 @@ namespace SA51ADWebApp1.Controllers
                 ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
                 return View(sol);
             }
+            if (sol.status == Status.BreakdownBoth)
+            {
+                sol.editedTimeToNextStation = 2000000000;
+                sol.editedTimeToNextStationOpp = 2000000000;
+            }
+            else if (sol.status == Status.BreakdownForward)
+            {
+                sol.editedTimeToNextStation = 2000000000;
+            }
+            else if (sol.status == Status.BreakdownOpposite)
+            {
+                sol.editedTimeToNextStationOpp = 2000000000;
+            }
             string userIdString = Request.Cookies["sessionId"];
             int userId = Convert.ToInt32(userIdString);
             transService.saveTransaction(sol, userId);
