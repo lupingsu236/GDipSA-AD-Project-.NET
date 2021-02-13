@@ -24,7 +24,7 @@ namespace SA51ADWebApp1.Middleware
                 string sessionId = context.Request.Cookies["sessionId"];
                 if (sessionId == null)
                 {
-                    context.Response.Redirect("https://" + context.Request.Host + "/");
+                    context.Response.Redirect("http://" + context.Request.Host + "/");
                     return;
                 }
                 else

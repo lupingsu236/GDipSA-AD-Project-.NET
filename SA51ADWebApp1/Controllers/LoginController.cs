@@ -20,6 +20,11 @@ namespace SA51ADWebApp1.Controllers
         [Route("/login")]
         public IActionResult Login()
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            if (sessionId != null)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
             Admin newLogin = new Admin();
             return View(newLogin);
         }
