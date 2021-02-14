@@ -30,9 +30,6 @@ namespace SA51ADWebApp1.Models
         public Status status { get; set; }
 
         [Required]
-        public string oppStatus { get; set; }
-
-        [Required]
         public int timeToNextStation { get; set; }
 
         [Required]

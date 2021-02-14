@@ -26,7 +26,8 @@ namespace SA51ADWebApp1.Service
             newTransaction.UserId = userId;
             newTransaction.StationOnLineId = sol.Id;
             newTransaction.newStatusOfStation = sol.status;
-            newTransaction.transactionTime = DateTime.Now;
+            TimeZoneInfo tzf = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+            newTransaction.transactionTime = TimeZoneInfo.ConvertTime(DateTime.Now, tzf);
             dbcontext.Add(newTransaction);
             dbcontext.SaveChanges();
         }
