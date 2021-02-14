@@ -16,7 +16,7 @@ namespace SA51ADWebApp1.Validation
         {
             int time = Convert.ToInt32(value);
 
-            if (time < 0 || time > 2000000000)
+            if (time < 0 || time > 9999)
             {
                 return new ValidationResult(GetErrorMessage());
             }

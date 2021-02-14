@@ -3,7 +3,9 @@
 *@
 @model StationOnLine
 @{
-        List<Transaction> tList = (List<Transaction>) ViewBag.transactions;
+    List<Transaction> tList = (List<Transaction>) ViewBag.transactions;
+    var forwardError = ViewBag.timingErrorForward;
+    var oppError = ViewBag.timingErrorOpp;
     }
 <html>
 <head>
@@ -129,6 +131,7 @@
                             <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
                             <input id="endStationNext" class="form-control" type="text" name="" value="End Station" readonly />
                             <span asp-validation-for="editedTimeToNextStation" class="text-danger"></span>
+                            <span class="text-danger">@forwardError</span>
                         </td>
                     </tr>
                     <tr id="oppstationtime">
@@ -138,6 +141,7 @@
                             <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
                             <input id="endStationOpp" class="form-control" type="text" name="" value="End Station" readonly />
                             <span asp-validation-for="editedTimeToNextStationOpp" class="text-danger"></span>
+                            <span class="text-danger">@oppError</span>
                         </td>
                     </tr>
                 </table>

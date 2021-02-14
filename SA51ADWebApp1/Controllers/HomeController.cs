@@ -78,6 +78,61 @@ namespace SA51ADWebApp1.Controllers
                 ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
                 return View(sol);
             }
+            if (sol.status == Status.DelayBoth)
+            {
+               if(sol.editedTimeToNextStation <= sol.timeToNextStation || sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
+                {
+                    if (sol.editedTimeToNextStation <= sol.timeToNextStation)
+                    {
+                        ViewBag.timingErrorForward = "Please enter a valid value greater than the default time of " + sol.timeToNextStation + " minutes";
+                    }
+                    if (sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
+                    {
+                        ViewBag.timingErrorOpp = "Please enter a valid value greater than the default time of " + sol.timeToNextStationOpp + " minutes";
+                    }
+                    StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
+                    sol.Station = specificStation.Station;
+                    ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
+                    return View(sol);
+                }
+            }
+            if (sol.status == Status.DelayForward)
+            {
+                if(sol.editedTimeToNextStation <= sol.timeToNextStation)
+                {
+                    ViewBag.timingErrorForward = "Please enter a valid value greater than the default time of " + sol.timeToNextStation + " minutes";
+                    StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
+                    sol.Station = specificStation.Station;
+                    ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
+                    return View(sol);
+                }
+            }
+            if (sol.status == Status.DelayOpposite)
+            {
+                if(sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
+                {
+                    ViewBag.timingErrorOpp = "Please enter a valid value greater than the default time of " + sol.timeToNextStationOpp + " minutes";
+                    StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
+                    sol.Station = specificStation.Station;
+                    ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
+                    return View(sol);
+                }
+            }
+            if (sol.editedTimeToNextStation < sol.timeToNextStation || sol.editedTimeToNextStationOpp < sol.timeToNextStationOpp)
+            {
+                StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
+                sol.Station = specificStation.Station;
+                ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
+                if(sol.editedTimeToNextStation < sol.timeToNextStation)
+                {
+                    ViewBag.timingErrorForward = "Please enter a valid value not less than the default time of " + sol.timeToNextStation + " minutes";
+                }
+                if(sol.editedTimeToNextStationOpp < sol.timeToNextStationOpp)
+                {
+                    ViewBag.timingErrorOpp = "Please enter a valid value not less than the default time of " + sol.timeToNextStationOpp + " minutes";
+                }
+                return View(sol);
+            }
             if (sol.status == Status.BreakdownBoth)
             {
                 sol.editedTimeToNextStation = 2000000000;
