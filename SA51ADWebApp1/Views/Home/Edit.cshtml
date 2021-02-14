@@ -8,27 +8,27 @@
 <html>
 <head>
     <script>
-        function statusselect0to6(index) {
+        function statusselect0to6(option_value) {
         document.getElementById("inputnextstationtime").style.display = "inline";
         document.getElementById("inputoppstationtime").style.display = "inline";
         document.getElementById("breakdownNext").style.display = "none";
         document.getElementById("breakdownOpp").style.display = "none";
         document.getElementById("endStationNext").style.display = "none";
         document.getElementById("endStationOpp").style.display = "none";
-        if (index == 0 || index == 1) {
+            if (option_value == 0 || option_value == 1) {
             document.getElementById("inputnextstationtime").readOnly = true;
             document.getElementById("inputoppstationtime").readOnly = true;
-            if (index == 0) {
+            if (option_value == 0) {
                 document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
                 document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
             }
-            if (index == 1) {
-                document.getElementById("inputnextstationtime").value = (2000000000);
+            if (option_value == 1) {
+                document.getElementById("inputnextstationtime").value = (9999);
                 document.getElementById("inputnextstationtime").style.display = "none";
                 if (@Model.timeToNextStation != 0) {
                     document.getElementById("breakdownNext").style.display = "inline";
                 }
-                document.getElementById("inputoppstationtime").value = (2000000000);
+                document.getElementById("inputoppstationtime").value = (9999);
                 document.getElementById("inputoppstationtime").style.display = "none";
                 if (@Model.timeToNextStationOpp != 0) {
                     document.getElementById("breakdownOpp").style.display = "inline";
@@ -38,34 +38,34 @@
         else {
             document.getElementById("inputnextstationtime").readOnly = false;
             document.getElementById("inputoppstationtime").readOnly = false;
-            if (index == 4) {
+            if (option_value == 4) {
                 document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
                 document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
             }
-            if (index == 2) {
+            if (option_value == 2) {
                 document.getElementById("inputnextstationtime").readOnly = true;
-                document.getElementById("inputnextstationtime").value = (2000000000);
+                document.getElementById("inputnextstationtime").value = (9999);
                 document.getElementById("inputnextstationtime").style.display = "none";
                 if (@Model.timeToNextStation != 0) {
                     document.getElementById("breakdownNext").style.display = "inline";
                 }
                 document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
             }
-            if (index == 3) {
+            if (option_value == 3) {
                 document.getElementById("inputoppstationtime").readOnly = true;
-                document.getElementById("inputoppstationtime").value = (2000000000);
+                document.getElementById("inputoppstationtime").value = (9999);
                 document.getElementById("inputoppstationtime").style.display = "none";
                 if (@Model.timeToNextStationOpp != 0) {
                     document.getElementById("breakdownOpp").style.display = "inline";
                 }
                 document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
             }
-            if (index == 5) {
+            if (option_value == 5) {
                 document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
                 document.getElementById("inputoppstationtime").readOnly = true;
                 document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
             }
-            if (index == 6) {
+            if (option_value == 6) {
                 document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
                 document.getElementById("inputnextstationtime").readOnly = true;
                 document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
@@ -84,14 +84,14 @@
     </script>
 </head>
 
-<body onload="statusselect0to6(document.getElementById('selectStatus').selectedIndex)">
+<body onload="statusselect0to6(document.getElementById('selectStatus123').value)">
     <h3>Edit page</h3>
     <div class="row">
         <div class="col-md-8">
             <form method="post" asp-controller="Home" asp-action="Edit">
                 <table class="table">
                     <tr>
-                        <td>Station Code</td>
+                          <td>Station Code</td>
                         <td><input style="border:none" type="text" name="stationCode" value=@Model.stationCode.ToString() readonly /></td>
                     </tr>
                     <tr>
@@ -102,7 +102,24 @@
                         <td>Status</td>
                         <td>
                             @*<input class="form-control" type="text" name="status" value=@Model.status.ToString() />*@
-                            <select id="selectStatus" onchange="statusselect0to6(this.selectedIndex)" class="form-control" asp-for="status" asp-items="@Html.GetEnumSelectList<Status>()"></select>
+                            <select id="selectStatus123" onchange="statusselect0to6(this.value)" class="form-control" asp-for="status">
+                                <option value="0" selected>Operational</option>
+                                @if (Model.timeToNextStation != 0 && Model.timeToNextStationOpp != 0)
+                                {
+                                    <option value="1">Bi-directional Breakdown</option>
+                                    <option value="4">Bi-directional Delay</option>
+                                }
+                                @if (Model.timeToNextStation != 0)
+                                {
+                                    <option value="2">Forward Breakdown</option>
+                                    <option value="5">Forward Delay</option>
+                                }
+                                @if (Model.timeToNextStationOpp != 0)
+                                { 
+                                    <option value="3">Opposite Breakdown</option>
+                                    <option value="6">Opposite Delay</option>
+                                }
+                            </select>
                         </td>
                     </tr>
                     <tr id="nextstationtime">
@@ -134,8 +151,8 @@
                 <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Home", new { lineID = Model.LineId})'">
             </form>
         </div>
-        <div class="col-md-4">
-            <h5>Transaction History</h5>
+        <div class="col-md-4 border">
+            <h5 class="border-bottom">Transaction History</h5>
             <div style="overflow:auto; height:250px;">
                 @foreach(var x in tList)
                 {
