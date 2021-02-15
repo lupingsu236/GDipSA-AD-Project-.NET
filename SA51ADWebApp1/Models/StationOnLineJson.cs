@@ -14,6 +14,8 @@ namespace SA51ADWebApp1.Models
         public int TimeToNextStation { get; set; }
 
         public int TimeToNextStationOpp { get; set; }
+
+        public Status Status { get; set; }
     }
 }
 
