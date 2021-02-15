@@ -436,6 +436,24 @@ namespace SA51ADWebApp1.Repository
             Transaction trans1 = new Transaction(); trans1.UserId = admin1.Id; trans1.StationOnLineId = CC1.Id;
             trans1.newStatusOfStation = Status.BreakdownBoth; trans1.transactionTime = DateTime.Now;
             db.Add(trans1);
+            Transaction trans2 = new Transaction(); trans2.UserId = admin1.Id; trans2.StationOnLineId = CC2.Id;
+            trans2.newStatusOfStation = Status.BreakdownBoth; trans2.transactionTime = DateTime.Now.AddMonths(-1);
+            db.Add(trans2);
+            Transaction trans3 = new Transaction(); trans3.UserId = admin1.Id; trans3.StationOnLineId = CC3.Id;
+            trans3.newStatusOfStation = Status.BreakdownBoth; trans3.transactionTime = DateTime.Now.AddMonths(-1);
+            db.Add(trans3);
+            Transaction trans4 = new Transaction(); trans4.UserId = admin1.Id; trans4.StationOnLineId = CC4.Id;
+            trans4.newStatusOfStation = Status.BreakdownBoth; trans4.transactionTime = DateTime.Now.AddMonths(-1);
+            db.Add(trans4);
+            Transaction trans5 = new Transaction(); trans5.UserId = admin1.Id; trans5.StationOnLineId = CC5.Id;
+            trans5.newStatusOfStation = Status.BreakdownBoth; trans5.transactionTime = DateTime.Now.AddMonths(-2);
+            db.Add(trans5);
+            Transaction trans6 = new Transaction(); trans6.UserId = admin1.Id; trans6.StationOnLineId = CC6.Id;
+            trans6.newStatusOfStation = Status.BreakdownBoth; trans6.transactionTime = DateTime.Now.AddMonths(-2);
+            db.Add(trans6);
+            Transaction trans7 = new Transaction(); trans7.UserId = admin1.Id; trans7.StationOnLineId = CC6.Id;
+            trans7.newStatusOfStation = Status.BreakdownBoth; trans7.transactionTime = DateTime.Now.AddMonths(-3);
+            db.Add(trans7);
 
             db.SaveChanges();
         }
