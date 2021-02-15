@@ -11,5 +11,6 @@ namespace SA51ADWebApp1.Service
     {
         public Boolean validateUser(String username, String password);
         public int getValidUserId(String username);
+        public string getUserById(int id);
     }
 }

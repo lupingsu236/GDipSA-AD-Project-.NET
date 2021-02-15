@@ -14,6 +14,11 @@ namespace SA51ADWebApp1.Service
             this.dbcontext = dbcontext;
         }
 
+        public string getUserById(int id)
+        {
+            return dbcontext.Admins.Where(x => x.Id == id).FirstOrDefault().username;
+        }
+
         public int getValidUserId(string username)
         {
             int validUserId = dbcontext.Admins.Where(x => x.username == username).FirstOrDefault().Id;

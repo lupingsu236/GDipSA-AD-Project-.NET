@@ -36,9 +36,11 @@ namespace SA51ADWebApp1.Controllers
             {
                 //string sessionId = System.Guid.NewGuid().ToString();
                 string sessionId = adminService.getValidUserId(newLogin.username).ToString();
+                string sessionName = adminService.getUserById(Convert.ToInt32(sessionId));
                 CookieOptions options = new CookieOptions();
                 options.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Append("sessionId", sessionId, options);
+                Response.Cookies.Append("sessionName", sessionName, options);
             }
             else
             {

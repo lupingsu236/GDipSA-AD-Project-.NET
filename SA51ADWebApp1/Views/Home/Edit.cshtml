@@ -51,7 +51,7 @@
                 if (@Model.timeToNextStation != 0) {
                     document.getElementById("breakdownNext").style.display = "inline";
                 }
-                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
             }
             if (option_value == 3) {
                 document.getElementById("inputoppstationtime").readOnly = true;
@@ -60,7 +60,7 @@
                 if (@Model.timeToNextStationOpp != 0) {
                     document.getElementById("breakdownOpp").style.display = "inline";
                 }
-                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
             }
             if (option_value == 5) {
                 document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
@@ -81,7 +81,12 @@
             document.getElementById("inputoppstationtime").style.display = "none";
             document.getElementById("endStationOpp").style.display = "inline";
         }
-
+        if (document.getElementById("inputoppstationtime").value == 2000000000) {
+            document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp;
+        }
+        if (document.getElementById("inputnextstationtime").value == 2000000000) {
+            document.getElementById("inputnextstationtime").value = @Model.timeToNextStation;
+        }
     }
     </script>
 </head>
@@ -113,19 +118,19 @@
                                 }
                                 @if (Model.timeToNextStation != 0)
                                 {
-                                    <option value="2">Forward Breakdown</option>
-                                    <option value="5">Forward Delay</option>
+                                    <option value="2">Decrement Breakdown</option>
+                                    <option value="5">Decrement Delay</option>
                                 }
                                 @if (Model.timeToNextStationOpp != 0)
                                 { 
-                                    <option value="3">Opposite Breakdown</option>
-                                    <option value="6">Opposite Delay</option>
+                                    <option value="3">Increment Breakdown</option>
+                                    <option value="6">Increment Delay</option>
                                 }
                             </select>
                         </td>
                     </tr>
                     <tr id="nextstationtime">
-                        <td>Time To Next Station</td>
+                        <td>Time To Decrement Station</td>
                         <td>
                             <input id="inputnextstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
                             <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
@@ -135,7 +140,7 @@
                         </td>
                     </tr>
                     <tr id="oppstationtime">
-                        <td>Time To Opposite Station</td>
+                        <td>Time To Increment Station</td>
                         <td>
                             <input id="inputoppstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
                             <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />

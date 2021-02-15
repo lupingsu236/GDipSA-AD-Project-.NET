@@ -12,6 +12,9 @@
         width: 80px;
     }
 </style>
+@{
+    var user = this.Context.Request.Cookies["sessionName"];   
+}
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -35,7 +38,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CCLine">CCLine</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout: @user</a>
                         </li>
                     </ul>
                 </div>
