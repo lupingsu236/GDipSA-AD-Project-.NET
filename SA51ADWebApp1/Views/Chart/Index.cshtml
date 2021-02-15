@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    TimeZoneInfo tzf = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+    DateTime timeNow = TimeZoneInfo.ConvertTime(DateTime.Now, tzf);
+    int monthNow = timeNow.Month;
+    String[] seqMonths = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    String[] monthArray = new string[12];
+
+    //starting month is monthNow, create new string[] starting from monthNow
+    for (int i = 0; i < 12; i++)
+    {
+        if(monthNow >= 12) { monthNow -= 12; }
+        monthArray[i] = seqMonths[monthNow];
+        monthNow++;
+    }
+    string month0 = monthArray[6];
+    string month1 = monthArray[7];
+    string month2 = monthArray[8];
+    string month3 = monthArray[9];
+    string month4 = monthArray[10];
+    string month5 = monthArray[11];
+    var bd0 = ViewData[month0];
+    var bd1 = ViewData[month1];
+    var bd2 = ViewData[month2];
+    var bd3 = ViewData[month3];
+    var bd4 = ViewData[month4];
+    var bd5 = ViewData[month5];
+    int bdmonth0 = Convert.ToInt32(bd0);
+    int bdmonth1 = Convert.ToInt32(bd1);
+    int bdmonth2 = Convert.ToInt32(bd2);
+    int bdmonth3 = Convert.ToInt32(bd3);
+    int bdmonth4 = Convert.ToInt32(bd4);
+    int bdmonth5 = Convert.ToInt32(bd5);
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<canvas id="myChart" width="400" height="240"></canvas>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['@month0', '@month1', '@month2', '@month3', '@month4', '@month5'],
+            datasets: [{
+                label: 'Train Breakdown in the past 6 months',
+                data: [@bdmonth0, @bdmonth1, @bdmonth2, @bdmonth3, @bdmonth4, @bdmonth5],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

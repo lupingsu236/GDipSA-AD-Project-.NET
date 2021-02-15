@@ -15,6 +15,14 @@ namespace SA51ADWebApp1.Service
             this.dbcontext = dbcontext;
         }
 
+        public List<Transaction> getAllBreakdownsIn12Months()
+        {
+            List<Transaction> allBreakdowns = dbcontext.Transactions.Where(x => (x.newStatusOfStation == Status.BreakdownBoth || x.newStatusOfStation == Status.BreakdownForward || x.newStatusOfStation == Status.BreakdownOpposite)).OrderBy(x => x.transactionTime).ToList();
+            TimeZoneInfo tzf = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+            DateTime transactionTime = TimeZoneInfo.ConvertTime(DateTime.Now, tzf);
+            return allBreakdowns.Where(x => x.transactionTime >= transactionTime.AddYears(-1)).OrderBy(x => x.transactionTime).ToList();
+        }
+
         public List<Transaction> getAllTransactionsAtStation(StationOnLine sol)
         {
             return dbcontext.Transactions.Where(x => x.StationOnLineId == sol.Id).OrderByDescending(x => x.transactionTime).ToList();
