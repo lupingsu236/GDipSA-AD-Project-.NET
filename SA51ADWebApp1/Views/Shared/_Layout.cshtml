@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SA51ADWebApp1</title>
+    <title>@ViewData["Title"] - MRT4You</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -22,6 +22,9 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Dashboard">
                     <img class="mrt-logo" src="~/images/mrt.png" />
                 </a>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">@user</a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +41,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CCLine">CCLine</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout: @user</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                         </li>
                     </ul>
                 </div>
