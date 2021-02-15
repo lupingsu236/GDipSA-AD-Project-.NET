@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/mrt4youdbserver/databases/MRT4You",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/mrt4youdbserver/databases/MRT4You",
       "type": "mssql.azure",
       "connectionId": "DbConn",
       "secretStore": "AzureAppSettings"

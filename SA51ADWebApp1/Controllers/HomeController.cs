@@ -266,23 +266,6 @@ namespace SA51ADWebApp1.Controllers
                 body = sol.stationCode + " " + stationname + " returns to be operational.";
             }
 
-            //var defaultApp = FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "key.json")),
-            //});
-
-            //var message = new Message()
-            //{
-            //    Notification = new Notification
-            //    {
-            //        Title = title,
-            //        Body = body
-            //    },
-            //    Topic = "notification"
-            //};
-            //var messaging = FirebaseMessaging.DefaultInstance;
-            //var result = await messaging.SendAsync(message);
-
             var push = NotificationService.push.Send(title, body);
 
             if (sol.LineId == 3)
