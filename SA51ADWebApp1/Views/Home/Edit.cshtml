@@ -118,19 +118,19 @@
                                 }
                                 @if (Model.timeToNextStation != 0)
                                 {
-                                    <option value="2">Decrement Breakdown</option>
-                                    <option value="5">Decrement Delay</option>
+                                    <option value="2">Opp Breakdown</option>
+                                    <option value="5">Opp Delay</option>
                                 }
                                 @if (Model.timeToNextStationOpp != 0)
                                 { 
-                                    <option value="3">Increment Breakdown</option>
-                                    <option value="6">Increment Delay</option>
+                                    <option value="3">Forward Breakdown</option>
+                                    <option value="6">Forward Delay</option>
                                 }
                             </select>
                         </td>
                     </tr>
                     <tr id="nextstationtime">
-                        <td>Time To Decrement Station</td>
+                        <td>Time To Opposite Station</td>
                         <td>
                             <input id="inputnextstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
                             <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
@@ -140,7 +140,7 @@
                         </td>
                     </tr>
                     <tr id="oppstationtime">
-                        <td>Time To Increment Station</td>
+                        <td>Time To Forward Station</td>
                         <td>
                             <input id="inputoppstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
                             <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
@@ -162,9 +162,29 @@
         <div class="col-md-4 border">
             <h5 class="border-bottom">Transaction History</h5>
             <div style="overflow:auto; height:250px;">
-                @foreach(var x in tList)
+                @foreach (var x in tList)
                 {
-                    <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime</p>
+                    string translatedStatus = "";
+                    switch(@x.newStatusOfStation)
+                    {
+                        case Status.Operational:
+                            translatedStatus = "Operational";  break;
+                        case Status.BreakdownBoth:
+                            translatedStatus = "Bi-directional Breakdown"; break;
+                        case Status.BreakdownForward:
+                            translatedStatus = "Opp Breakdown"; break;
+                        case Status.BreakdownOpposite:
+                            translatedStatus = "Forward Breakdown"; break;
+                        case Status.DelayBoth:
+                            translatedStatus = "Bi-directional Delay"; break;
+                        case Status.DelayForward:
+                            translatedStatus = "Opp Delay"; break;
+                        case Status.DelayOpposite:
+                            translatedStatus = "Forward Delay"; break;
+                        default:
+                            translatedStatus = "Error"; break;
+                    }
+                    <p>Status update to @translatedStatus by @x.User.username at @x.transactionTime</p>
                 }
             </div>
         </div>

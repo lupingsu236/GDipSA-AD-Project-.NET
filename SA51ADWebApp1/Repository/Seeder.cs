@@ -1,4 +1,5 @@
-﻿using SA51ADWebApp1.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SA51ADWebApp1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -426,10 +427,16 @@ namespace SA51ADWebApp1.Repository
             //StationOnLine CE2 = new StationOnLine(); CE2.LineId = yellowLine.Id; CE2.StationId = MarinaBay.Id; CE2.stationCode = "CE02";
             //CE2.status = Status.Operational; CE2.oppStatus = "Operational"; CE2.timeToNextStation = 2; CE2.timeToNextStationOpp = 0;
             //db.Add(CE2);
+            db.SaveChanges();
 
             //find a way to stream from CVS in to this.
             //object item = inputstream....
             //createStationOnLine(item.Id, time,timeOpp)
+
+            Transaction trans1 = new Transaction(); trans1.UserId = admin1.Id; trans1.StationOnLineId = CC1.Id;
+            trans1.newStatusOfStation = Status.BreakdownBoth; trans1.transactionTime = DateTime.Now;
+            db.Add(trans1);
+
             db.SaveChanges();
         }
     }
