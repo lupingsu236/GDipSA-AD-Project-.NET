@@ -39,7 +39,7 @@ namespace SA51ADWebApp1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NewsJson>>> GetLatestNews()
         {
-            return await context.Transactions.OrderByDescending(x => x.transactionTime).Take(5).Select(x => new NewsJson
+            return await context.Transactions.OrderByDescending(x => x.transactionTime).Take(10).Select(x => new NewsJson
             {
                 Time = x.transactionTime.ToString(),
                 StationCode = x.StationOnLine.stationCode,
