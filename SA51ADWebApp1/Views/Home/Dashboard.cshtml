@@ -6,7 +6,7 @@
 }
 
 <div class="text-center">
-    <h1>Dashboard</h1>
+    <h5>Dashboard</h5>
 </div>
 
 <div>
@@ -19,12 +19,12 @@
             </div>
         </div>
     }
-    <div class="card-columns align-content-center text-center">
+    @*<div class="card-columns align-content-center text-center">*@
         @foreach (var line in lines)
         {
             @if ((int)line.status >= 1 && (int)line.status <= 3)
             {
-                <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-danger mb-3 align-content-center text-center" style="max-width: 100rem;">
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 15px">@line.status</h5>
@@ -34,7 +34,7 @@
             }
             @if ((int)line.status >= 4)
             {
-                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                <div class="card text-white bg-warning mb-3 align-content-center text-center" style="max-width: 100rem;">
                     <div class="card-header">@(line.stationCode + ": " + line.Station.stationName)</div>
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 15px">@line.status</h5>
@@ -43,6 +43,6 @@
                 </div>
             }
         }
-    </div>
+    @*</div>*@
 </div>
 
