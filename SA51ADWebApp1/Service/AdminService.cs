@@ -27,7 +27,12 @@ namespace SA51ADWebApp1.Service
 
         public Boolean validateUser(String username, String password)
         {
-            byte[] storedSalt = dbcontext.Admins.Where(x => x.username == username).FirstOrDefault().salt;
+            byte[] storedSalt = null;
+            Admin admin = dbcontext.Admins.Where(x => x.username == username).FirstOrDefault();
+            if (admin != null)
+            {
+                storedSalt = admin.salt;
+            }
             string hashedPassword = password;
             if (storedSalt != null)
             {
