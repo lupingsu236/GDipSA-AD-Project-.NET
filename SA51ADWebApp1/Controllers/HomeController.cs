@@ -97,7 +97,7 @@ namespace SA51ADWebApp1.Controllers
                     return View(sol);
                 }
             }
-            if (sol.status == Status.DelayForward)
+            if (sol.status == Status.DelayOpposite)
             {
                 if(sol.editedTimeToNextStation <= sol.timeToNextStation)
                 {
@@ -108,7 +108,7 @@ namespace SA51ADWebApp1.Controllers
                     return View(sol);
                 }
             }
-            if (sol.status == Status.DelayOpposite)
+            if (sol.status == Status.DelayForward)
             {
                 if(sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
                 {
@@ -139,11 +139,11 @@ namespace SA51ADWebApp1.Controllers
                 sol.editedTimeToNextStation = 2000000000;
                 sol.editedTimeToNextStationOpp = 2000000000;
             }
-            else if (sol.status == Status.BreakdownForward)
+            else if (sol.status == Status.BreakdownOpposite)
             {
                 sol.editedTimeToNextStation = 2000000000;
             }
-            else if (sol.status == Status.BreakdownOpposite)
+            else if (sol.status == Status.BreakdownForward)
             {
                 sol.editedTimeToNextStationOpp = 2000000000;
             }
@@ -160,11 +160,11 @@ namespace SA51ADWebApp1.Controllers
             {
                 body = sol.stationCode + " " + stationname + " both directions break down.";
             }
-            else if (sol.status == Status.BreakdownForward)
+            else if (sol.status == Status.BreakdownOpposite)
             {
                 body = sol.stationCode + " " + stationname + " forward direction breaks down.";
             }
-            else if (sol.status == Status.BreakdownOpposite)
+            else if (sol.status == Status.BreakdownForward)
             {
                 body = sol.stationCode + " " + stationname + " opposite direction breaks down.";
             }
@@ -174,12 +174,12 @@ namespace SA51ADWebApp1.Controllers
                     " time to next forward station is expected to be " + sol.editedTimeToNextStation +
                     " min, time to next opposite station is expected to be " + sol.editedTimeToNextStationOpp + " min";
             }
-            else if (sol.status == Status.DelayForward)
+            else if (sol.status == Status.DelayOpposite)
             {
                 body = sol.stationCode + " " + stationname + " forward direction delays." +
                     " time to next forward station is expected to be " + sol.editedTimeToNextStation + " min";
             }
-            else if (sol.status == Status.DelayOpposite)
+            else if (sol.status == Status.DelayForward)
             {
                 body = sol.stationCode + " " + stationname + " opposite direction delays." +
                     " time to next opposite station is expected to be " + sol.editedTimeToNextStationOpp + " min";

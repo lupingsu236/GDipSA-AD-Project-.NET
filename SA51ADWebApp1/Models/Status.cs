@@ -9,10 +9,10 @@ namespace SA51ADWebApp1.Models
     {
         Operational, 
         BreakdownBoth,
-        BreakdownForward,
         BreakdownOpposite,
+        BreakdownForward,
         DelayBoth,
-        DelayForward,
-        DelayOpposite
+        DelayOpposite,
+        DelayForward
     }
 }

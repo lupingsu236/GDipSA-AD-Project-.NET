@@ -118,8 +118,8 @@
                                 }
                                 @if (Model.timeToNextStation != 0)
                                 {
-                                    <option value="2">Opp Breakdown</option>
-                                    <option value="5">Opp Delay</option>
+                                    <option value="2">Opposite Breakdown</option>
+                                    <option value="5">Opposite Delay</option>
                                 }
                                 @if (Model.timeToNextStationOpp != 0)
                                 { 
@@ -164,27 +164,7 @@
             <div style="overflow:auto; height:250px;">
                 @foreach (var x in tList)
                 {
-                    string translatedStatus = "";
-                    switch(@x.newStatusOfStation)
-                    {
-                        case Status.Operational:
-                            translatedStatus = "Operational";  break;
-                        case Status.BreakdownBoth:
-                            translatedStatus = "Bi-directional Breakdown"; break;
-                        case Status.BreakdownForward:
-                            translatedStatus = "Opp Breakdown"; break;
-                        case Status.BreakdownOpposite:
-                            translatedStatus = "Forward Breakdown"; break;
-                        case Status.DelayBoth:
-                            translatedStatus = "Bi-directional Delay"; break;
-                        case Status.DelayForward:
-                            translatedStatus = "Opp Delay"; break;
-                        case Status.DelayOpposite:
-                            translatedStatus = "Forward Delay"; break;
-                        default:
-                            translatedStatus = "Error"; break;
-                    }
-                    <p>Status update to @translatedStatus by @x.User.username at @x.transactionTime</p>
+                    <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime</p>
                 }
             </div>
         </div>

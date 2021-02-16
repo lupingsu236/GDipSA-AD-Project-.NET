@@ -36,6 +36,7 @@
 }
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
+<h5 style="text-align:center">Train breakdown count in the past 6 months</h5>
 <canvas id="myChart" width="400" height="240"></canvas>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -44,7 +45,7 @@
         data: {
             labels: ['@month0', '@month1', '@month2', '@month3', '@month4', '@month5'],
             datasets: [{
-                label: 'Train breakdown count in the past 6 months',
+                //label: '<Click to disable graph>',
                 data: [@bdmonth0, @bdmonth1, @bdmonth2, @bdmonth3, @bdmonth4, @bdmonth5],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -66,6 +67,9 @@
             }]
         },
         options: {
+            legend: {
+                display: false,
+            },
             scales: {
                 yAxes: [{
                     ticks: {
