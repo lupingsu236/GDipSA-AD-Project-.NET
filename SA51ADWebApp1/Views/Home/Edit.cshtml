@@ -119,6 +119,11 @@
             }
         }
     </script>
+    <style>
+        #exampleText {
+            font-size: smaller;
+        }
+    </style>
 </head>
 
 <body onload="statusselect0to6(document.getElementById('selectStatus123').value)">
@@ -160,7 +165,7 @@
                         </td>
                     </tr>
                     <tr id="nextstationtime">
-                        <td>Time To Opposite Station</td>
+                        <td>Time To Opposite Station <br /><span id="exampleText">(e.g. EW03 to EW02)</span></td>
                         <td>
                             <input id="inputnextstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStation" value=@Model.timeToNextStation.ToString() />
                             <input id="breakdownNext" class="form-control" type="text" name="" value="Breakdown" readonly />
@@ -170,7 +175,7 @@
                         </td>
                     </tr>
                     <tr id="oppstationtime">
-                        <td>Time To Forward Station</td>
+                        <td>Time To Forward Station <br /><span id="exampleText">(e.g. EW01 to EW02)</span></td>
                         <td>
                             <input id="inputoppstationtime" class="form-control" type="number" min="0" max="9999" name="editedTimeToNextStationOpp" value=@Model.timeToNextStationOpp.ToString() />
                             <input id="breakdownOpp" class="form-control" type="text" name="" value="Breakdown" readonly />
