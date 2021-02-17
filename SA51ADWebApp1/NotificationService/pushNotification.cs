@@ -26,7 +26,7 @@ namespace SA51ADWebApp1.NotificationService
                     Title = title,
                     Body = body
                 },               
-                Topic = "notification"
+                Topic = "mrt4you_notif"
             };
             var messaging = FirebaseMessaging.DefaultInstance;
             var result = await messaging.SendAsync(message);
