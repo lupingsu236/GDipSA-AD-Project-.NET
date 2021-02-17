@@ -1,8 +1,6 @@
 ﻿using SA51ADWebApp1.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SA51ADWebApp1.Service
 {
@@ -13,5 +11,7 @@ namespace SA51ADWebApp1.Service
         public StationOnLine getSpecificStationOnLine(String stationCode);
         public List<StationOnLine> getAllNonOperational();
         public string getSpecificStationName(string stationCode);
+        public string GetSpecificStationLine(string stationCode);
+        public List<string> GenerateNotificationMsg(StationOnLine stationOnLine);
     }
 }

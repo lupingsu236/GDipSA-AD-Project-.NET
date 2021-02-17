@@ -45,8 +45,8 @@ namespace SA51ADWebApp1.Controllers
                 StationCode = x.StationOnLine.stationCode,
                 StationName = x.StationOnLine.Station.stationName,
                 CurrentStatus = x.newStatusOfStation,
-                TimeToNextStation = x.StationOnLine.editedTimeToNextStation,
-                TimeToNextStationOpp = x.StationOnLine.editedTimeToNextStationOpp
+                TimeToNextStation = x.editedTimeToNextStation,
+                TimeToNextStationOpp = x.editedTimeToNextStationOpp
             }).ToListAsync();
         }
     }
