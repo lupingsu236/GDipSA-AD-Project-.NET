@@ -191,7 +191,7 @@
         </div>
         <div class="col-md-4 border">
             <h5 class="border-bottom">Transaction History</h5>
-            <div style="overflow:auto; height:250px;">
+            <div style="overflow:auto; height:300px;">
                 @foreach (var x in tList)
                 {
                     <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime.ToString("dd-MMM-yyyy h:mm:ss tt")</p>
