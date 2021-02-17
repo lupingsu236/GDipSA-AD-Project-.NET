@@ -86,7 +86,7 @@ namespace SA51ADWebApp1.Controllers
             }
             if (sol.status == Status.DelayBoth)
             {
-               if(sol.editedTimeToNextStation <= sol.timeToNextStation || sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
+                if (sol.editedTimeToNextStation <= sol.timeToNextStation || sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
                 {
                     if (sol.editedTimeToNextStation <= sol.timeToNextStation)
                     {
@@ -104,7 +104,7 @@ namespace SA51ADWebApp1.Controllers
             }
             if (sol.status == Status.DelayOpposite)
             {
-                if(sol.editedTimeToNextStation <= sol.timeToNextStation)
+                if (sol.editedTimeToNextStation <= sol.timeToNextStation)
                 {
                     ViewBag.timingErrorForward = "Please enter a valid value greater than the default time of " + sol.timeToNextStation + " minutes";
                     StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
@@ -115,7 +115,7 @@ namespace SA51ADWebApp1.Controllers
             }
             if (sol.status == Status.DelayForward)
             {
-                if(sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
+                if (sol.editedTimeToNextStationOpp <= sol.timeToNextStationOpp)
                 {
                     ViewBag.timingErrorOpp = "Please enter a valid value greater than the default time of " + sol.timeToNextStationOpp + " minutes";
                     StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
@@ -129,11 +129,11 @@ namespace SA51ADWebApp1.Controllers
                 StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
                 sol.Station = specificStation.Station;
                 ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
-                if(sol.editedTimeToNextStation < sol.timeToNextStation)
+                if (sol.editedTimeToNextStation < sol.timeToNextStation)
                 {
                     ViewBag.timingErrorForward = "Please enter a valid value not less than the default time of " + sol.timeToNextStation + " minutes";
                 }
-                if(sol.editedTimeToNextStationOpp < sol.timeToNextStationOpp)
+                if (sol.editedTimeToNextStationOpp < sol.timeToNextStationOpp)
                 {
                     ViewBag.timingErrorOpp = "Please enter a valid value not less than the default time of " + sol.timeToNextStationOpp + " minutes";
                 }
@@ -158,42 +158,9 @@ namespace SA51ADWebApp1.Controllers
             solService.saveEdit(sol);
             TempData["Success"] = "Added Successfully!";
 
-            string stationname = solService.getSpecificStationName(sol.stationCode);
-            string title = "MRT4You";
-            string body;
-            if (sol.status == Status.BreakdownBoth)
-            {
-                body = sol.stationCode + " " + stationname + " both directions break down.";
-            }
-            else if (sol.status == Status.BreakdownOpposite)
-            {
-                body = sol.stationCode + " " + stationname + " forward direction breaks down.";
-            }
-            else if (sol.status == Status.BreakdownForward)
-            {
-                body = sol.stationCode + " " + stationname + " opposite direction breaks down.";
-            }
-            else if (sol.status == Status.DelayBoth)
-            {
-                body = sol.stationCode + " " + stationname + " both directions delay." +
-                    " time to next forward station is expected to be " + sol.editedTimeToNextStation +
-                    " min, time to next opposite station is expected to be " + sol.editedTimeToNextStationOpp + " min";
-            }
-            else if (sol.status == Status.DelayOpposite)
-            {
-                body = sol.stationCode + " " + stationname + " forward direction delays." +
-                    " time to next forward station is expected to be " + sol.editedTimeToNextStation + " min";
-            }
-            else if (sol.status == Status.DelayForward)
-            {
-                body = sol.stationCode + " " + stationname + " opposite direction delays." +
-                    " time to next opposite station is expected to be " + sol.editedTimeToNextStationOpp + " min";
-            }
-            else
-            {
-                body = sol.stationCode + " " + stationname + " returns to be operational.";
-            }
-
+            List<string> notificationContent = solService.GenerateNotificationMsg(sol);
+            string title = notificationContent[0];
+            string body = notificationContent[1];
             var push = NotificationService.PushNotification.Send(title, body);
 
             if (sol.LineId == 3)

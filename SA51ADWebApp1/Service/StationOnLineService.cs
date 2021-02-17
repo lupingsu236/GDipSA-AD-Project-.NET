@@ -41,8 +41,66 @@ namespace SA51ADWebApp1.Service
         public string getSpecificStationName(String stationCode)
         {
             StationOnLine specificStation = dbcontext.StationOnLines.Where(x => x.stationCode == stationCode).FirstOrDefault();
-            List<Station> stationall=dbcontext.Stations.Where(x => x.StationOnLines.Contains(specificStation)).ToList();
+            List<Station> stationall = dbcontext.Stations.Where(x => x.StationOnLines.Contains(specificStation)).ToList();
             return stationall.FirstOrDefault().stationName;
+        }
+
+        public string GetSpecificStationLine(string stationCode)
+        {
+            return dbcontext.StationOnLines.Where(x => x.stationCode == stationCode).Select(x => x.Line.lineName).FirstOrDefault();
+        }
+
+        public List<string> GenerateNotificationMsg(StationOnLine stationOnLine)
+        {
+            List<StationOnLine> stationsOnLine = getAllStationsOnLine(GetSpecificStationLine(stationOnLine.stationCode));
+            string firstStationOnLine = stationsOnLine[0].Station.stationName;
+            string lastStationOnLine = stationsOnLine[stationsOnLine.Count() - 1].Station.stationName;
+
+            string stationName = getSpecificStationName(stationOnLine.stationCode);
+
+            string title = $"{GetSpecificStationLine(stationOnLine.stationCode)}: ";
+            string msg;
+
+            if (stationOnLine.status == Status.BreakdownBoth)
+            {
+                title += "BREAKDOWN";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} have stopped.";
+            }
+            else if (stationOnLine.status == Status.BreakdownOpposite)
+            {
+                title += "BREAKDOWN";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} have stopped.";
+            }
+            else if (stationOnLine.status == Status.BreakdownForward)
+            {
+                title += "BREAKDOWN";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} have stopped.";
+            }
+            else if (stationOnLine.status == Status.DelayBoth)
+            {
+                title += "DELAY";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} are delayed.";
+            }
+            else if (stationOnLine.status == Status.DelayOpposite)
+            {
+                title += "DELAY";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} are delayed.";
+            }
+            else if (stationOnLine.status == Status.DelayForward)
+            {
+                title += "DELAY";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} are delayed.";
+            }
+            else
+            {
+                title += "NORMAL";
+                msg = $"Train services at {stationOnLine.stationCode} {stationName} are now running normally.";
+            }
+
+            List<string> output = new List<string>();
+            output.Add(title);
+            output.Add(msg);
+            return output;
         }
     }
 }
