@@ -194,7 +194,7 @@ namespace SA51ADWebApp1.Controllers
                 body = sol.stationCode + " " + stationname + " returns to be operational.";
             }
 
-            //var push = NotificationService.PushNotification.Send(title, body);
+            var push = NotificationService.PushNotification.Send(title, body);
 
             if (sol.LineId == 3)
             {
