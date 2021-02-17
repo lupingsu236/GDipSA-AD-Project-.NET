@@ -3,7 +3,6 @@ using SA51ADWebApp1.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SA51ADWebApp1.Service
 {
@@ -52,10 +51,9 @@ namespace SA51ADWebApp1.Service
 
         public List<string> GenerateNotificationMsg(StationOnLine stationOnLine)
         {
-            List<StationOnLine> stationsOnLine = getAllStationsOnLine(GetSpecificStationLine(stationOnLine.stationCode));
-            string firstStationOnLine = stationsOnLine[0].Station.stationName;
-            string lastStationOnLine = stationsOnLine[stationsOnLine.Count() - 1].Station.stationName;
-
+            List<string> stationsOnLineNames = dbcontext.StationOnLines.Where(x => x.LineId == stationOnLine.LineId).OrderBy(x => x.stationCode).Select(x => x.Station.stationName).ToList();
+            string firstStationOnLine = stationsOnLineNames[0];
+            string lastStationOnLine = stationsOnLineNames[stationsOnLineNames.Count() - 1];
             string stationName = getSpecificStationName(stationOnLine.stationCode);
 
             string title = $"{GetSpecificStationLine(stationOnLine.stationCode)}: ";
@@ -64,42 +62,44 @@ namespace SA51ADWebApp1.Service
             if (stationOnLine.status == Status.BreakdownBoth)
             {
                 title += "BREAKDOWN";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} have stopped.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} have stopped.";
             }
             else if (stationOnLine.status == Status.BreakdownOpposite)
             {
                 title += "BREAKDOWN";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} have stopped.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} have stopped.";
             }
             else if (stationOnLine.status == Status.BreakdownForward)
             {
                 title += "BREAKDOWN";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} have stopped.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} have stopped.";
             }
             else if (stationOnLine.status == Status.DelayBoth)
             {
                 title += "DELAY";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} are delayed.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} have been delayed.";
             }
             else if (stationOnLine.status == Status.DelayOpposite)
             {
                 title += "DELAY";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} are delayed.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} in the direction of {firstStationOnLine} have been delayed.";
             }
             else if (stationOnLine.status == Status.DelayForward)
             {
                 title += "DELAY";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} are delayed.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} in the direction of {lastStationOnLine} have been delayed.";
             }
             else
             {
                 title += "NORMAL";
-                msg = $"Train services at {stationOnLine.stationCode} {stationName} are now running normally.";
+                msg = $"Train services from {stationOnLine.stationCode} {stationName} are now running normally.";
             }
 
-            List<string> output = new List<string>();
-            output.Add(title);
-            output.Add(msg);
+            List<string> output = new List<string>
+            {
+                title,
+                msg
+            };
             return output;
         }
     }
