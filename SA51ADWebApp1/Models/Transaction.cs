@@ -28,6 +28,10 @@ namespace SA51ADWebApp1.Models
         [Required]
         public DateTime transactionTime { get; set; }
 
-        //public string notes { get; set; }
+        [Required]
+        public int editedTimeToNextStation { get; set; }
+
+        [Required]
+        public int editedTimeToNextStationOpp { get; set; }
     }
 }

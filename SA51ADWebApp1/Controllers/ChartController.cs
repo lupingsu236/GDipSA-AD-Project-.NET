@@ -17,6 +17,7 @@ namespace SA51ADWebApp1.Controllers
         }
         public IActionResult Index()
         {
+            ViewData["Title"] = "Analytics";
             List<Transaction> tList = transService.getAllBreakdownsIn6Months();
             ViewBag.breakdownList = tList;
             return View();

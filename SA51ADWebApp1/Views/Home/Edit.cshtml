@@ -18,76 +18,106 @@
         document.getElementById("endStationNext").style.display = "none";
         document.getElementById("endStationOpp").style.display = "none";
             if (option_value == 0 || option_value == 1) {
-            document.getElementById("inputnextstationtime").readOnly = true;
-            document.getElementById("inputoppstationtime").readOnly = true;
-            if (option_value == 0) {
-                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
-                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
-            }
-            if (option_value == 1) {
-                document.getElementById("inputnextstationtime").value = (9999);
-                document.getElementById("inputnextstationtime").style.display = "none";
-                if (@Model.timeToNextStation != 0) {
-                    document.getElementById("breakdownNext").style.display = "inline";
-                }
-                document.getElementById("inputoppstationtime").value = (9999);
-                document.getElementById("inputoppstationtime").style.display = "none";
-                if (@Model.timeToNextStationOpp != 0) {
-                    document.getElementById("breakdownOpp").style.display = "inline";
-                }
-            }
-        }
-        else {
-            document.getElementById("inputnextstationtime").readOnly = false;
-            document.getElementById("inputoppstationtime").readOnly = false;
-            if (option_value == 4) {
-                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
-                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
-            }
-            if (option_value == 2) {
                 document.getElementById("inputnextstationtime").readOnly = true;
-                document.getElementById("inputnextstationtime").value = (9999);
+                document.getElementById("inputoppstationtime").readOnly = true;
+                if (option_value == 0) {
+                    document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                    document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                }
+                if (option_value == 1) {
+                    document.getElementById("inputnextstationtime").value = (9999);
+                    document.getElementById("inputnextstationtime").style.display = "none";
+                    if (@Model.timeToNextStation != 0) {
+                        document.getElementById("breakdownNext").style.display = "inline";
+                    }
+                    document.getElementById("inputoppstationtime").value = (9999);
+                    document.getElementById("inputoppstationtime").style.display = "none";
+                    if (@Model.timeToNextStationOpp != 0) {
+                        document.getElementById("breakdownOpp").style.display = "inline";
+                    }
+                }
+            }
+            else {
+                document.getElementById("inputnextstationtime").readOnly = false;
+                document.getElementById("inputoppstationtime").readOnly = false;
+                if (option_value == 4) {
+                    if (@Model.editedTimeToNextStation == 0) {
+                        document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                    }
+                    else {
+                        document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                    }
+                    if (@Model.editedTimeToNextStationOpp == 0) {
+                        document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                    }
+                    else {
+                        document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+                    }
+                }
+                if (option_value == 2) {
+                    document.getElementById("inputnextstationtime").readOnly = true;
+                    document.getElementById("inputnextstationtime").value = (9999);
+                    document.getElementById("inputnextstationtime").style.display = "none";
+                    if (@Model.timeToNextStation != 0) {
+                        document.getElementById("breakdownNext").style.display = "inline";
+                    }
+                    if (@Model.editedTimeToNextStationOpp == 0) {
+                        document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                    }
+                    else {
+                        document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+                    }
+                }
+                if (option_value == 3) {
+                    document.getElementById("inputoppstationtime").readOnly = true;
+                    document.getElementById("inputoppstationtime").value = (9999);
+                    document.getElementById("inputoppstationtime").style.display = "none";
+                    if (@Model.timeToNextStationOpp != 0) {
+                        document.getElementById("breakdownOpp").style.display = "inline";
+                    }
+                    if (@Model.editedTimeToNextStation == 0) {
+                        document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                    }
+                    else {
+                        document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                    }
+                }
+                if (option_value == 5) {
+                    if (@Model.editedTimeToNextStation == 0) {
+                        document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                    }
+                    else {
+                        document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                    }
+                    document.getElementById("inputoppstationtime").readOnly = true;
+                    document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                }
+                if (option_value == 6) {
+                    if (@Model.editedTimeToNextStationOpp == 0) {
+                        document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+                    }
+                    else {
+                        document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+                    }
+                    document.getElementById("inputnextstationtime").readOnly = true;
+                    document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+                }
+            }
+            if (@Model.timeToNextStation == 0) {
                 document.getElementById("inputnextstationtime").style.display = "none";
-                if (@Model.timeToNextStation != 0) {
-                    document.getElementById("breakdownNext").style.display = "inline";
-                }
-                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
+                document.getElementById("endStationNext").style.display = "inline";
             }
-            if (option_value == 3) {
-                document.getElementById("inputoppstationtime").readOnly = true;
-                document.getElementById("inputoppstationtime").value = (9999);
+            if (@Model.timeToNextStationOpp == 0) {
                 document.getElementById("inputoppstationtime").style.display = "none";
-                if (@Model.timeToNextStationOpp != 0) {
-                    document.getElementById("breakdownOpp").style.display = "inline";
-                }
-                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
+                document.getElementById("endStationOpp").style.display = "inline";
             }
-            if (option_value == 5) {
-                document.getElementById("inputnextstationtime").value = @Model.editedTimeToNextStation.ToString();
-                document.getElementById("inputoppstationtime").readOnly = true;
-                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
+            if (document.getElementById("inputoppstationtime").value == 2000000000) {
+                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp;
             }
-            if (option_value == 6) {
-                document.getElementById("inputoppstationtime").value = @Model.editedTimeToNextStationOpp.ToString();
-                document.getElementById("inputnextstationtime").readOnly = true;
-                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
+            if (document.getElementById("inputnextstationtime").value == 2000000000) {
+                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation;
             }
         }
-        if (@Model.timeToNextStation == 0) {
-            document.getElementById("inputnextstationtime").style.display = "none";
-            document.getElementById("endStationNext").style.display = "inline";
-        }
-        if (@Model.timeToNextStationOpp == 0) {
-            document.getElementById("inputoppstationtime").style.display = "none";
-            document.getElementById("endStationOpp").style.display = "inline";
-        }
-        if (document.getElementById("inputoppstationtime").value == 2000000000) {
-            document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp;
-        }
-        if (document.getElementById("inputnextstationtime").value == 2000000000) {
-            document.getElementById("inputnextstationtime").value = @Model.timeToNextStation;
-        }
-    }
     </script>
 </head>
 
@@ -164,7 +194,7 @@
             <div style="overflow:auto; height:250px;">
                 @foreach (var x in tList)
                 {
-                    <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime</p>
+                    <p>Status update to @x.newStatusOfStation by @x.User.username at @x.transactionTime.ToString("dd-MMM-yyyy h:mm:ss tt")</p>
                 }
             </div>
         </div>

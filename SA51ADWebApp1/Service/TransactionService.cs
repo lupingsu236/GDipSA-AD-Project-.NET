@@ -35,6 +35,8 @@ namespace SA51ADWebApp1.Service
             newTransaction.UserId = userId;
             newTransaction.StationOnLineId = sol.Id;
             newTransaction.newStatusOfStation = sol.status;
+            newTransaction.editedTimeToNextStation = sol.editedTimeToNextStation;
+            newTransaction.editedTimeToNextStationOpp = sol.editedTimeToNextStationOpp;
             TimeZoneInfo tzf = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
             newTransaction.transactionTime = TimeZoneInfo.ConvertTime(DateTime.Now, tzf);
             dbcontext.Add(newTransaction);

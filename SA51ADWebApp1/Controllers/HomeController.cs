@@ -25,6 +25,7 @@ namespace SA51ADWebApp1.Controllers
         }
         public IActionResult Dashboard()
         {
+            ViewData["Title"] = "Dashboard";
             List<StationOnLine> nonOperationalLines = solService.getAllNonOperational();
             ViewBag.faultyLines = nonOperationalLines;
             return View();
@@ -33,6 +34,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult NSLine()
         {
             ViewData["Title"] = "NS Line";
+            ViewData["Header"] = "North-South Line";
             ViewBag.LineCode = "NS";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("North-South Line");
             ViewBag.Line = stationOnLineList;
@@ -42,6 +44,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult EWLine()
         {
             ViewData["Title"] = "EW Line";
+            ViewData["Header"] = "East-West Line";
             ViewBag.LineCode = "EW";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("East-West Line");
             ViewBag.Line = stationOnLineList;
@@ -50,6 +53,7 @@ namespace SA51ADWebApp1.Controllers
         public IActionResult CCLine()
         {
             ViewData["Title"] = "CC Line";
+            ViewData["Header"] = "Circle Line";
             ViewBag.LineCode = "CC";
             List<StationOnLine> stationOnLineList = solService.getAllStationsOnLine("Circle Line");
             ViewBag.Line = stationOnLineList;
@@ -64,6 +68,7 @@ namespace SA51ADWebApp1.Controllers
 
         public IActionResult Edit(String stationCode)
         {
+            ViewData["Title"] = "Edit";
             StationOnLine specificStation = solService.getSpecificStationOnLine(stationCode);
             ViewBag.transactions = (List<Transaction>) transService.getAllTransactionsAtStation(specificStation);
             return View(specificStation);

@@ -20,6 +20,7 @@ namespace SA51ADWebApp1.Controllers
         [Route("/login")]
         public IActionResult Login()
         {
+            ViewData["Title"] = "Login";
             string sessionId = HttpContext.Request.Cookies["sessionId"];
             if (sessionId != null)
             {
@@ -53,6 +54,7 @@ namespace SA51ADWebApp1.Controllers
         [Route("/logout")]
         public IActionResult Logout()
         {
+            ViewData["Title"] = "Logout";
             string sessionId = Request.Cookies["sessionId"];
             if (sessionId == null)
             {
