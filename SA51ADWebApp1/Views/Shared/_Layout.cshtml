@@ -1,9 +1,14 @@
 ﻿<!DOCTYPE html>
-<style>
-    .mrt-logo {
-        width: 80px;
-    }
-</style>
+@{
+    var user = this.Context.Request.Cookies["sessionName"];
+    string pageTitle = (string)ViewData["Title"];
+    int activeLink = 0;
+    if (pageTitle.Equals("NS Line")) { activeLink = 1; }
+    else if (pageTitle.Equals("CC Line")) { activeLink = 2; }
+    else if (pageTitle.Equals("EW Line")) { activeLink = 3; }
+    else if (pageTitle.Equals("Analytics")) { activeLink = 4; }
+}
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,11 +17,32 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script>
+        function activeLink() {
+            if (@activeLink == 1) {
+                document.getElementById("nslink").classList.add("active");
+            }
+            else if (@activeLink == 2) {
+                document.getElementById("cclink").classList.add("active");
+            }
+            else if (@activeLink == 3) {
+                document.getElementById("ewlink").classList.add("active");
+            }
+            else if (@activeLink == 4) {
+                document.getElementById("analyticslink").classList.add("active");
+            }
+        }
+    </script>
+    <style>
+        .mrt-logo {
+            width: 80px;
+        }
+        .active {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-@{
-    var user = this.Context.Request.Cookies["sessionName"];   
-}
-<body>
+<body onload="activeLink()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -24,7 +50,7 @@
                     <img class="mrt-logo" src="~/images/mrt.png" />
                 </a>
                 <div class="navbar-header">
-                    <span class="navbar-brand" href="#">MRT4You</span>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Dashboard">MRT4You</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -33,20 +59,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CCLine">CCLine</a>
+                            <a class="nav-link" id="cclink" asp-area="" asp-controller="Home" asp-action="CCLine">CCLine</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EWLine">EWLine</a>
+                            <a class="nav-link" id="ewlink" asp-area="" asp-controller="Home" asp-action="EWLine">EWLine</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="NSLine">NSLine</a>
+                            <a class="nav-link" id="nslink" asp-area="" asp-controller="Home" asp-action="NSLine">NSLine</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Chart" asp-action="Index">Analytics</a>
+                            <a class="nav-link" id="analyticslink" asp-area="" asp-controller="Chart" asp-action="Index">Analytics</a>
                         </li>
                         @*<li class="ml-md-auto nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout&nbsp;@user</a>
-                        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout&nbsp;@user</a>
+                            </li>*@
                         <li class="nav-item dropdown ml-md-auto">
                             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
