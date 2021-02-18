@@ -429,10 +429,6 @@ namespace SA51ADWebApp1.Repository
             //db.Add(CE2);
             db.SaveChanges();
 
-            //find a way to stream from CVS in to this.
-            //object item = inputstream....
-            //createStationOnLine(item.Id, time,timeOpp)
-
             Transaction trans1 = new Transaction(); trans1.UserId = admin1.Id; trans1.StationOnLineId = CC1.Id;
             trans1.newStatusOfStation = Status.BreakdownBoth; trans1.transactionTime = DateTime.Now; 
             trans1.editedTimeToNextStation = 2; trans1.editedTimeToNextStationOpp = 2;
