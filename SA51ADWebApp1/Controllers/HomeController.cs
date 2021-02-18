@@ -81,7 +81,7 @@ namespace SA51ADWebApp1.Controllers
             {
                 StationOnLine specificStation = solService.getSpecificStationOnLine(sol.stationCode);
                 sol.Station = specificStation.Station;
-                ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(specificStation);
+                ViewBag.transactions = (List<Transaction>)transService.getAllTransactionsAtStation(sol);
                 return View(sol);
             }
             if (sol.status == Status.DelayBoth)

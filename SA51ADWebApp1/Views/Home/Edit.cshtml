@@ -25,12 +25,12 @@
                     document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
                 }
                 if (option_value == 1) {
-                    document.getElementById("inputnextstationtime").value = (9999);
+                    document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
                     document.getElementById("inputnextstationtime").style.display = "none";
                     if (@Model.timeToNextStation != 0) {
                         document.getElementById("breakdownNext").style.display = "inline";
                     }
-                    document.getElementById("inputoppstationtime").value = (9999);
+                    document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
                     document.getElementById("inputoppstationtime").style.display = "none";
                     if (@Model.timeToNextStationOpp != 0) {
                         document.getElementById("breakdownOpp").style.display = "inline";
@@ -56,7 +56,7 @@
                 }
                 if (option_value == 2) {
                     document.getElementById("inputnextstationtime").readOnly = true;
-                    document.getElementById("inputnextstationtime").value = (9999);
+                    document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
                     document.getElementById("inputnextstationtime").style.display = "none";
                     if (@Model.timeToNextStation != 0) {
                         document.getElementById("breakdownNext").style.display = "inline";
@@ -70,7 +70,7 @@
                 }
                 if (option_value == 3) {
                     document.getElementById("inputoppstationtime").readOnly = true;
-                    document.getElementById("inputoppstationtime").value = (9999);
+                    document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
                     document.getElementById("inputoppstationtime").style.display = "none";
                     if (@Model.timeToNextStationOpp != 0) {
                         document.getElementById("breakdownOpp").style.display = "inline";
@@ -112,10 +112,10 @@
                 document.getElementById("endStationOpp").style.display = "inline";
             }
             if (document.getElementById("inputoppstationtime").value == 2000000000) {
-                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp;
+                document.getElementById("inputoppstationtime").value = @Model.timeToNextStationOpp.ToString();
             }
             if (document.getElementById("inputnextstationtime").value == 2000000000) {
-                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation;
+                document.getElementById("inputnextstationtime").value = @Model.timeToNextStation.ToString();
             }
         }
     </script>
